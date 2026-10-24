@@ -1,0 +1,58 @@
+{
+  "defaults": {
+    "target_size": 1000,
+    "snap_radius_m": 50,
+    "min_year": 2021,
+    "min_separation_m": 40,
+    "highway_types": ["primary", "secondary", "tertiary", "residential", "unclassified", "living_street"],
+    "difficulty": {
+      "primary": "easy",
+      "secondary": "easy",
+      "tertiary": "medium",
+      "unclassified": "medium",
+      "residential": "hard",
+      "living_street": "hard"
+    }
+  },
+  "maps": [
+    {
+      "id": "mumbai",
+      "name": "Mumbai",
+      "boundary": { "osm_ids": ["R7964375", "R7964376"] }
+    },
+    {
+      "id": "thane",
+      "name": "Thane",
+      "boundary": { "nominatim": "Thane, Maharashtra, India" }
+    },
+    {
+      "id": "navi-mumbai",
+      "name": "Navi Mumbai",
+      "boundary": { "nominatim": "Navi Mumbai, Maharashtra, India" }
+    },
+    {
+      "id": "colaba",
+      "name": "Colaba",
+      "boundary": { "nominatim": "Colaba, Mumbai, Maharashtra, India" },
+      "target_size": 300
+    },
+    {
+      "id": "bandra",
+      "name": "Bandra",
+      "boundary": { "nominatim": "Bandra, Mumbai, Maharashtra, India" },
+      "target_size": 400
+    },
+    {
+      "id": "andheri",
+      "name": "Andheri",
+      "boundary": { "nominatim": "Andheri, Mumbai, Maharashtra, India" },
+      "target_size": 500
+    },
+    {
+      "id": "powai",
+      "name": "Powai",
+      "boundary": { "nominatim": "Powai, Mumbai, Maharashtra, India" },
+      "target_size": 300
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+ "generated_utc": "2026-10-24T11:59:37Z",
+ "maps": [
+  {
+   "id": "mumbai",
+   "name": "Mumbai",
+   "file": "mumbai.json",
+   "count": 200,
+   "counts": {
+    "hard": 117,
+    "medium": 44,
+    "easy": 39
+   },
+   "bbox": [
+    18.89216,
+    72.77341,
+    19.26948,
+    72.98175
+   ],
+   "score_scale_m": 4732
+  }
+ ]
+}

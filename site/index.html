@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- ==========================================================================
+     index.html: structure only. Look is in style.css, settings in config.js,
+     behaviour in game.js. Screens are toggled with the `hidden` attribute.
+     ========================================================================== -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gali Guesser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Rozha+One&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Problems the player can act on (missing key, blocked key, no pools) -->
+  <div id="error-banner" class="error-banner" role="alert" hidden></div>
+
+  <!-- ================= MENU ================= -->
+  <main id="screen-menu" class="screen screen-menu">
+    <header class="brand">
+      <h1 id="app-title" class="brand-title"></h1>
+      <p id="app-tagline" class="brand-tagline"></p>
+    </header>
+
+    <section class="menu-maps" aria-labelledby="maps-heading">
+      <h2 id="maps-heading" class="menu-heading">Choose a map</h2>
+      <div id="map-list" class="map-list" role="radiogroup" aria-labelledby="maps-heading"></div>
+    </section>
+
+    <form id="options-form" class="menu-options" autocomplete="off">
+      <fieldset class="field">
+        <legend>Difficulty</legend>
+        <div id="opt-difficulty" class="segmented" role="radiogroup"></div>
+        <p id="difficulty-note" class="field-note"></p>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Rounds</legend>
+        <div id="opt-rounds" class="segmented" role="radiogroup"></div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Time per round</legend>
+        <div id="opt-timer" class="segmented" role="radiogroup"></div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>Movement</legend>
+        <div id="opt-movement" class="segmented" role="radiogroup"></div>
+        <p id="movement-note" class="field-note"></p>
+      </fieldset>
+
+      <button id="start-btn" class="btn btn-primary" type="submit" disabled>Start game</button>
+    </form>
+  </main>
+
+  <!-- ================= GAME ================= -->
+  <main id="screen-game" class="screen screen-game" hidden>
+    <div id="pano" class="pano" aria-label="Street View"></div>
+    <div id="pano-shield" class="pano-shield" hidden></div>
+
+    <div class="hud hud-left">
+      <span id="hud-map" class="hud-chip"></span>
+      <span id="hud-round" class="hud-chip"></span>
+    </div>
+    <div class="hud hud-right">
+      <span id="hud-score" class="hud-chip"></span>
+      <span id="hud-timer" class="hud-chip hud-timer" hidden></span>
+    </div>
+    <button id="back-to-start" class="btn btn-ghost hud-back" type="button">Back to start</button>
+
+    <aside id="guess-panel" class="guess-panel" aria-label="Guess map">
+      <div id="guess-map" class="guess-map"></div>
+      <div class="guess-actions">
+        <button id="guess-toggle" class="btn btn-ghost" type="button" aria-expanded="false" aria-controls="guess-map">Enlarge map</button>
+        <button id="guess-btn" class="btn btn-primary" type="button" disabled>Place your pin</button>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ================= RESULT (after each round) ================= -->
+  <main id="screen-result" class="screen screen-result" hidden>
+    <div id="result-map" class="result-map"></div>
+    <section class="result-card" aria-live="polite">
+      <p id="result-lead" class="result-lead"></p>
+      <p class="result-distance"><span id="result-distance-value"></span><span id="result-distance-unit" class="result-unit"></span></p>
+      <p id="result-sub" class="result-sub"></p>
+      <div class="meter" aria-hidden="true"><div id="result-meter" class="meter-fill"></div></div>
+      <p class="result-points"><span id="result-points"></span> <span class="result-points-of" id="result-points-of"></span></p>
+      <button id="next-btn" class="btn btn-primary" type="button"></button>
+    </section>
+  </main>
+
+  <!-- ================= FINAL ================= -->
+  <main id="screen-final" class="screen screen-final" hidden>
+    <header class="final-head">
+      <p id="final-map" class="final-map"></p>
+      <p class="final-total"><span id="final-total"></span><span id="final-max" class="final-max"></span></p>
+      <p id="final-best" class="final-best"></p>
+    </header>
+    <ol id="final-rounds" class="final-rounds"></ol>
+    <div class="final-actions">
+      <button id="again-btn" class="btn btn-primary" type="button">Play again</button>
+      <button id="menu-btn" class="btn btn-ghost" type="button">Choose another map</button>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="scoring.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

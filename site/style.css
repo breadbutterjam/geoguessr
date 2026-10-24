@@ -1,0 +1,339 @@
+/* ==========================================================================
+   style.css: the whole look. Change colours, type and sizes in the tokens below;
+   nothing else in the file hard-codes a colour or font.
+
+   Palette idea: Mumbai seafront. Deep sea-ink, cool limewash walls,
+   bougainvillea pink for action, sea-aqua for the player, ticket-lemon for the truth.
+   ========================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+  /* colour */
+  --ink:            #0f2e33;   /* page and panels */
+  --ink-raised:     #17424a;   /* chips, inputs, tracks */
+  --ink-line:       #2a5a63;   /* dividers */
+  --limewash:       #eaf0ec;   /* main text, selected states */
+  --limewash-dim:   #b4c6c0;   /* secondary text */
+  --bougainvillea:  #b8306a;   /* primary action */
+  --bougainvillea-hi: #cc3f7c; /* primary action, hover */
+  --aqua:           #5fb7ae;   /* the player's pin */
+  --lemon:          #f2cc3f;   /* the true location, focus ring */
+
+  /* type */
+  --font-display: 'Rozha One', 'Noto Serif Devanagari', Georgia, serif;
+  --font-body:    'Hanken Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --step--1: 0.875rem;
+  --step-0:  1rem;
+  --step-1:  1.25rem;
+  --step-2:  1.75rem;
+  --step-3:  clamp(2.25rem, 5vw, 3.5rem);
+  --step-4:  clamp(3.5rem, 10vw, 6.5rem);
+
+  /* shape and space */
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --gap: 1rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --shadow-float: 0 10px 30px rgb(0 0 0 / 0.35);
+
+  /* sizes of the guess map */
+  --guess-w: 300px;
+  --guess-h: 190px;
+  --guess-w-open: min(680px, 62vw);
+  --guess-h-open: min(460px, 56vh);
+}
+
+/* ---------- 2. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: var(--ink);
+  color: var(--limewash);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, p, ol, fieldset { margin: 0; padding: 0; }
+ol { list-style: none; }
+fieldset { border: 0; min-width: 0; }
+
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 3px solid var(--lemon); outline-offset: 2px; }
+
+.screen { min-height: 100dvh; }
+
+/* ---------- 3. Buttons ---------- */
+.btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--radius-s);
+  border: 2px solid transparent;
+  cursor: pointer;
+  color: var(--limewash);
+}
+.btn:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.btn-primary { background: var(--bougainvillea); }
+.btn-primary:not(:disabled):hover { background: var(--bougainvillea-hi); }
+
+.btn-ghost { background: transparent; border-color: var(--ink-line); }
+.btn-ghost:hover { background: var(--ink-raised); }
+
+/* ---------- 4. Error banner ---------- */
+.error-banner {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  padding: 0.9rem var(--gutter);
+  background: var(--lemon);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- 5. Menu ---------- */
+.screen-menu {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-areas:
+    'brand   options'
+    'maps    options';
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(2rem, 6vw, 6rem);
+  row-gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 4rem) var(--gutter);
+}
+
+.brand { grid-area: brand; }
+.brand-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-4);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+.brand-tagline {
+  margin-top: 1rem;
+  max-width: 34ch;
+  font-size: var(--step-1);
+  color: var(--limewash-dim);
+}
+
+.menu-maps { grid-area: maps; align-self: start; }
+.menu-heading {
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--limewash-dim);
+  margin-bottom: 0.5rem;
+}
+
+.map-list { display: flex; flex-direction: column; }
+.map-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap);
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--ink-line);
+  cursor: pointer;
+}
+.map-item:last-child { border-bottom: 1px solid var(--ink-line); }
+.map-item:hover { background: var(--ink-raised); }
+.map-item-name { font-family: var(--font-display); font-size: var(--step-2); line-height: 1.15; }
+.map-item-meta { font-size: var(--step--1); color: var(--limewash-dim); white-space: nowrap; }
+.map-item.is-selected { background: var(--limewash); color: var(--ink); }
+.map-item.is-selected .map-item-meta { color: var(--ink); }
+
+.menu-options {
+  grid-area: options;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--ink-raised);
+  border-radius: var(--radius-m);
+}
+
+.field legend { font-weight: 600; margin-bottom: 0.5rem; }
+.field-note { margin-top: 0.4rem; min-height: 1.4em; font-size: var(--step--1); color: var(--limewash-dim); }
+
+.segmented { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.seg {
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  color: var(--limewash);
+  background: transparent;
+  border: 2px solid var(--ink-line);
+  border-radius: var(--radius-s);
+  cursor: pointer;
+}
+.seg:hover:not(:disabled) { border-color: var(--limewash-dim); }
+.seg[aria-checked='true'] { background: var(--limewash); border-color: var(--limewash); color: var(--ink); }
+.seg:disabled { opacity: 0.4; cursor: not-allowed; }
+
+#start-btn { align-self: stretch; padding-block: 0.9rem; font-size: var(--step-1); }
+
+/* ---------- 6. Game ---------- */
+.screen-game { position: fixed; inset: 0; background: #000; }
+
+.pano, .pano-shield { position: absolute; inset: 0; }
+.pano { z-index: 0; }
+.pano-shield { z-index: 1; }   /* blocks dragging and zooming in "Frozen view" */
+
+.hud {
+  position: absolute;
+  top: max(0.75rem, env(safe-area-inset-top));
+  z-index: 5;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.hud-left  { left: 0.75rem; }
+.hud-right { right: 0.75rem; }
+.hud-chip {
+  padding: 0.35rem 0.8rem;
+  background: rgb(15 46 51 / 0.88);
+  border-radius: var(--radius-s);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.hud-timer.is-low { background: var(--bougainvillea); }
+
+.hud-back {
+  position: absolute;
+  z-index: 5;
+  left: 0.75rem;
+  bottom: max(0.75rem, env(safe-area-inset-bottom));
+  background: rgb(15 46 51 / 0.88);
+}
+
+.guess-panel {
+  position: absolute;
+  z-index: 6;
+  right: 0.75rem;
+  bottom: max(0.75rem, env(safe-area-inset-bottom));
+  width: var(--guess-w);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgb(15 46 51 / 0.92);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-float);
+  transition: width 0.18s ease;
+}
+.guess-map { width: 100%; height: var(--guess-h); border-radius: var(--radius-s); overflow: hidden; transition: height 0.18s ease; }
+.guess-actions { display: flex; gap: 0.5rem; }
+.guess-actions .btn { flex: 1; padding-block: 0.6rem; }
+#guess-btn { flex: 2; }
+
+.guess-panel.is-open { width: var(--guess-w-open); }
+.guess-panel.is-open .guess-map { height: var(--guess-h-open); }
+@media (hover: hover) and (pointer: fine) {
+  .guess-panel:hover { width: var(--guess-w-open); }
+  .guess-panel:hover .guess-map { height: var(--guess-h-open); }
+}
+
+/* pins drawn on the maps: different shapes, so colour is never the only clue */
+.pin { width: 22px; height: 22px; border: 3px solid var(--ink); box-shadow: 0 2px 6px rgb(0 0 0 / 0.5); }
+.pin-guess { background: var(--aqua); border-radius: 50%; }
+.pin-true  { background: var(--lemon); border-radius: 3px; transform: rotate(45deg); }
+
+/* ---------- 7. Result ---------- */
+.screen-result { position: fixed; inset: 0; }
+.result-map { position: absolute; inset: 0; }
+
+.result-card {
+  position: absolute;
+  z-index: 5;
+  left: 1rem;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  width: min(440px, calc(100% - 2rem));
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: var(--ink);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-float);
+}
+.result-lead { color: var(--limewash-dim); }
+.result-distance {
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  line-height: 1;
+  margin: 0.15rem 0 0.35rem;
+}
+.result-unit { font-size: var(--step-2); margin-left: 0.4rem; }
+.result-sub { color: var(--limewash-dim); font-size: var(--step--1); min-height: 1.4em; }
+
+.meter { height: 10px; margin: 1rem 0 0.5rem; background: var(--ink-raised); border-radius: 999px; overflow: hidden; }
+.meter-fill { height: 100%; width: var(--pct, 0%); background: var(--bougainvillea); border-radius: inherit; transition: width 0.6s ease-out; }
+
+.result-points { font-weight: 700; font-size: var(--step-1); font-variant-numeric: tabular-nums; margin-bottom: 1rem; }
+.result-points-of { font-weight: 400; font-size: var(--step--1); color: var(--limewash-dim); }
+#next-btn { width: 100%; padding-block: 0.8rem; }
+
+/* ---------- 8. Final ---------- */
+.screen-final {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 6vw, 4rem) var(--gutter);
+}
+.final-map { color: var(--limewash-dim); font-size: var(--step-1); }
+.final-total { font-family: var(--font-display); font-size: var(--step-4); line-height: 1; margin: 0.25rem 0; font-variant-numeric: tabular-nums; }
+.final-max { font-family: var(--font-body); font-size: var(--step-1); color: var(--limewash-dim); margin-left: 0.5rem; }
+.final-best { min-height: 1.5em; color: var(--lemon); font-weight: 600; }
+
+.final-rounds { margin: 2rem 0; border-top: 1px solid var(--ink-line); }
+.final-round {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr auto;
+  grid-template-areas: 'n dist pts' '. bar bar' '. link link';
+  column-gap: var(--gap);
+  row-gap: 0.35rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--ink-line);
+  font-variant-numeric: tabular-nums;
+}
+.final-round-n    { grid-area: n; color: var(--limewash-dim); }
+.final-round-dist { grid-area: dist; font-weight: 600; }
+.final-round-pts  { grid-area: pts; font-weight: 700; }
+.final-round-bar  { grid-area: bar; height: 6px; background: var(--ink-raised); border-radius: 999px; overflow: hidden; }
+.final-round-bar > span { display: block; height: 100%; width: var(--pct, 0%); background: var(--bougainvillea); }
+.final-round-link { grid-area: link; font-size: var(--step--1); color: var(--limewash-dim); }
+.final-round-link:hover { color: var(--limewash); }
+
+.final-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ---------- 9. Small screens ---------- */
+@media (max-width: 860px) {
+  .screen-menu {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'brand' 'maps' 'options';
+    grid-template-rows: auto;
+  }
+  .guess-panel { left: 0.75rem; right: 0.75rem; width: auto; bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+  .guess-panel.is-open { width: auto; }
+  .hud-back { bottom: auto; top: calc(max(0.75rem, env(safe-area-inset-top)) + 2.6rem); }
+  :root { --guess-h: 130px; --guess-h-open: 52vh; }
+  .result-card { left: 0.75rem; }
+}
+
+/* ---------- 10. Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
