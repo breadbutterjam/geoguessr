@@ -43,6 +43,18 @@
       "target_size": 400
     },
     {
+      "id": "santacruz",
+      "name": "Santacruz",
+      "boundary": { "geojson": "areas/santacruz.geojson" }, 
+      "target_size": 300 
+    },
+    {
+      "id": "juhu_andheri",
+      "name": "Juhu Andheri",
+      "boundary": { "geojson": "areas/JuhuAndheri.geojson" }, 
+      "target_size": 300 
+    },
+    {
       "id": "andheri",
       "name": "Andheri",
       "boundary": { "nominatim": "Andheri, Mumbai, Maharashtra, India" },

@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-24T11:59:37Z",
+ "generated_utc": "2026-10-26T11:59:09Z",
  "maps": [
   {
    "id": "mumbai",
@@ -18,6 +18,42 @@
     72.98175
    ],
    "score_scale_m": 4732
+  },
+  {
+   "id": "santacruz",
+   "name": "Santacruz",
+   "file": "santacruz.json",
+   "count": 300,
+   "counts": {
+    "easy": 48,
+    "medium": 39,
+    "hard": 213
+   },
+   "bbox": [
+    19.0635,
+    72.82187,
+    19.09192,
+    72.84754
+   ],
+   "score_scale_m": 415
+  },
+  {
+   "id": "juhu_andheri",
+   "name": "Juhu Andheri",
+   "file": "juhu_andheri.json",
+   "count": 300,
+   "counts": {
+    "hard": 183,
+    "easy": 60,
+    "medium": 57
+   },
+   "bbox": [
+    19.0635,
+    72.82187,
+    19.11653,
+    72.85535
+   ],
+   "score_scale_m": 687
   }
  ]
 }

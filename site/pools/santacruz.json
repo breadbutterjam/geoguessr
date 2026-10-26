@@ -1,0 +1,2424 @@
+{
+ "id": "santacruz",
+ "name": "Santacruz",
+ "generated_utc": "2026-10-26T10:28:28Z",
+ "bbox": [
+  19.0635,
+  72.82187,
+  19.09192,
+  72.84754
+ ],
+ "score_scale_m": 415,
+ "settings": {
+  "snap_radius_m": 50,
+  "min_year": 2021,
+  "min_separation_m": 40
+ },
+ "counts": {
+  "easy": 48,
+  "medium": 39,
+  "hard": 213
+ },
+ "locations": [
+  {
+   "pano_id": "ILjIiEnMcSQeOZlnzrkJOw",
+   "lat": 19.064205,
+   "lng": 72.834981,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "dwn2aikoQ1frpG7qJD7QvA",
+   "lat": 19.080811,
+   "lng": 72.843897,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "QJCJQtJh7e35NJEcyl_oYA",
+   "lat": 19.076496,
+   "lng": 72.823556,
+   "date": "2024-11",
+   "road": "living_street",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "jsdFY42LWuMnuILNQemfNA",
+   "lat": 19.083998,
+   "lng": 72.83192,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "-Tgk_zwzs34CyYPkdyrQCg",
+   "lat": 19.067113,
+   "lng": 72.825426,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2IN4TZgF70d4-MImXvvMGg",
+   "lat": 19.085468,
+   "lng": 72.839913,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Gek2hoyZOeH6L3TFd_T-7g",
+   "lat": 19.083658,
+   "lng": 72.840627,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "rZG1pw3_YOA-7nQNTurK5A",
+   "lat": 19.083725,
+   "lng": 72.834566,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "q0hxgw3qU9Axxo5mJNGZLA",
+   "lat": 19.089248,
+   "lng": 72.836579,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "geEZqW5Byyvt4mMnkHr4Vw",
+   "lat": 19.073901,
+   "lng": 72.822174,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "iaafHNSWQcfJEnEJXJBgcg",
+   "lat": 19.073716,
+   "lng": 72.827956,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "j8C5Jg7G3MhVyZNx6vSjTQ",
+   "lat": 19.068172,
+   "lng": 72.823418,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "llCU2xmLdc8AYHgy4oyBug",
+   "lat": 19.07005,
+   "lng": 72.838691,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "nocz8bpivJcPfNRk5s-IRA",
+   "lat": 19.070532,
+   "lng": 72.832591,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "mPMP1UAbaUMCZc3fFdBLqQ",
+   "lat": 19.073874,
+   "lng": 72.829355,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "s5B0Cwoml6WehqgonlytVA",
+   "lat": 19.069086,
+   "lng": 72.836267,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "1R40AzyKLxfZzjP4lSFapg",
+   "lat": 19.083274,
+   "lng": 72.839052,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSHENJQUJJaEFEQl85T0pTZXFfOEpiUEFpV04tcko.",
+   "lat": 19.083194,
+   "lng": 72.83631,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "9qD_MF1ACefOwVxoTp3MMw",
+   "lat": 19.091606,
+   "lng": 72.838653,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "SUBjgtMrUGUYgKDtivKczw",
+   "lat": 19.079632,
+   "lng": 72.844701,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRGVuODJQNVFF",
+   "lat": 19.089187,
+   "lng": 72.838565,
+   "date": "2022-10",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRFdqNEdVakFF",
+   "lat": 19.068914,
+   "lng": 72.833646,
+   "date": "2022-04",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "UemCdf20EfNTYBYNYPRMfQ",
+   "lat": 19.087674,
+   "lng": 72.827211,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "A59C0Lbah7_DK5lGQCSwWQ",
+   "lat": 19.079193,
+   "lng": 72.830344,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "-Ir5y2yXzVV2NRJkdwfMKA",
+   "lat": 19.068799,
+   "lng": 72.823349,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "kSxkMesP_V0HdIK1gnQ-Gg",
+   "lat": 19.065402,
+   "lng": 72.824851,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "qtKFUGIYDv0ALvJ4gBTCCQ",
+   "lat": 19.075973,
+   "lng": 72.837789,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "8sI20h25ZBIVlWai5cA09g",
+   "lat": 19.074721,
+   "lng": 72.84653,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "NIkm8VjW2Hxt5hNq_ljEcQ",
+   "lat": 19.080673,
+   "lng": 72.833353,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "pGA4MlLheIpVf37WQmXyCA",
+   "lat": 19.076948,
+   "lng": 72.83337,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "V0uqi4fZu9R2HP-E4xgr7A",
+   "lat": 19.07505,
+   "lng": 72.829358,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Auu-bcylqWmAmo0QKwTc0w",
+   "lat": 19.091694,
+   "lng": 72.846195,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "aAi3vjWGbsun1x_EJuli1w",
+   "lat": 19.064907,
+   "lng": 72.837265,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "H1wZv7A_cUnsIPpjgRspcQ",
+   "lat": 19.075307,
+   "lng": 72.835333,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2Uo9F8W-kl5hdx5bxP8Qjg",
+   "lat": 19.088411,
+   "lng": 72.84345,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "p1wt5WWWnApgUnDZP9-gUQ",
+   "lat": 19.084314,
+   "lng": 72.846394,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "8evAMLD2FxoDoM1yeRQLJA",
+   "lat": 19.079931,
+   "lng": 72.833616,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "OS6q8QS__hAcT3vjPFCMWQ",
+   "lat": 19.088492,
+   "lng": 72.827251,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "OaLtJ7nFcne490RursB_wA",
+   "lat": 19.08992,
+   "lng": 72.839737,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "m7g1VkzjZHjamuFutYytkA",
+   "lat": 19.088042,
+   "lng": 72.833001,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "8xWPbYp91RT0y80qF_0XcQ",
+   "lat": 19.077544,
+   "lng": 72.824028,
+   "date": "2024-11",
+   "road": "living_street",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "z7oG0o-l1Ra2sEZf4oG88Q",
+   "lat": 19.079429,
+   "lng": 72.830763,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yLKfx10y2TH7lZ8eVE8dIg",
+   "lat": 19.067775,
+   "lng": 72.844555,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "1AIvs2_yExeIT-cqnoV3ig",
+   "lat": 19.078707,
+   "lng": 72.832467,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "4A0wkl9iuzW_a2DpWck-0w",
+   "lat": 19.08911,
+   "lng": 72.834456,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "QALj4SBrQaXp3e8xpw2adA",
+   "lat": 19.070762,
+   "lng": 72.822947,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "-xZ9A-0_6w0kihfKdWX4mw",
+   "lat": 19.065456,
+   "lng": 72.832497,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "pu4Ym8-ZsktfDaj7O__Vng",
+   "lat": 19.068116,
+   "lng": 72.825371,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ozqCd0rZcCissqSax_7B0A",
+   "lat": 19.085128,
+   "lng": 72.836413,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "u7ghT9idERoOSMMGw_KPiA",
+   "lat": 19.078029,
+   "lng": 72.843714,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "eOvwRKNnJ6J__zi3s5Pakw",
+   "lat": 19.065667,
+   "lng": 72.84471,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "0K1Vw_Z3q7RxvceJHkYX4g",
+   "lat": 19.063835,
+   "lng": 72.832462,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "LECRBYcltDHxlMRF4P1tSg",
+   "lat": 19.076382,
+   "lng": 72.841717,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "fP4MgX_nXE1joFFLu41lrA",
+   "lat": 19.07225,
+   "lng": 72.835001,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ixtT1j0IRa9h46xftOqzSg",
+   "lat": 19.074776,
+   "lng": 72.823013,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "-VZDnOPmMlifkQg57noB-A",
+   "lat": 19.080633,
+   "lng": 72.830737,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "-Ed0uZZosxsZoWiMTx2LWQ",
+   "lat": 19.070313,
+   "lng": 72.836401,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "tRGDcAq-Gv1tg1XFoqnOHw",
+   "lat": 19.07458,
+   "lng": 72.829402,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ucDIhs4WODofKufyZ_2L7A",
+   "lat": 19.076117,
+   "lng": 72.83921,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "lRAdkXAHyF8sf7TQfsbqng",
+   "lat": 19.075976,
+   "lng": 72.828582,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Fqjl8QIE26EgckPr62Mk0w",
+   "lat": 19.067337,
+   "lng": 72.823918,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "13mRRC7YPiIFdVljw80sOg",
+   "lat": 19.072865,
+   "lng": 72.837433,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJQ205WmI1eVFF",
+   "lat": 19.068322,
+   "lng": 72.835031,
+   "date": "2022-01",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "EmdVEFJBgmfwQijHCjiN6A",
+   "lat": 19.089929,
+   "lng": 72.840679,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "nx9TLvGtnWGGrfPY1G6SRw",
+   "lat": 19.067775,
+   "lng": 72.833636,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "_o2XTp-85StjNDT8w3KvjQ",
+   "lat": 19.069352,
+   "lng": 72.832156,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "iauu_xNqkEZtQeygKh77zQ",
+   "lat": 19.086314,
+   "lng": 72.84537,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "QatMTUv868eCNTCyFq3evg",
+   "lat": 19.089824,
+   "lng": 72.827989,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "x3lMX2VmKjApKZ_GXf1UXA",
+   "lat": 19.08454,
+   "lng": 72.843927,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "pcGdVMdDxD0081skGMytnw",
+   "lat": 19.078181,
+   "lng": 72.837883,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "wYno3FsShrZ5Q6gRPZLBeQ",
+   "lat": 19.065923,
+   "lng": 72.836908,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "xOwV6YKNrXJV9cuB5Kaw5g",
+   "lat": 19.073346,
+   "lng": 72.83331,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "RQOH5jEqyEmuOCZu-fGppQ",
+   "lat": 19.068705,
+   "lng": 72.832935,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "sr88l3I2YMNyABBxAOd6OQ",
+   "lat": 19.089329,
+   "lng": 72.832712,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJRHIxdDdWWVE.",
+   "lat": 19.064238,
+   "lng": 72.830551,
+   "date": "2024-04",
+   "road": "living_street",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "DXTu2sW9FOkq2dagGfo55w",
+   "lat": 19.090642,
+   "lng": 72.843043,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "AFeRM9vE_HJDz1Vl7UPx2Q",
+   "lat": 19.063997,
+   "lng": 72.846957,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "FR7zv7Y5E_H4XaJnab2PWw",
+   "lat": 19.081145,
+   "lng": 72.832461,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Sw1CfOjQPrYqWgLZE4WezQ",
+   "lat": 19.091601,
+   "lng": 72.842066,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "z1QSuSkLT3yfEXFOVCSEgQ",
+   "lat": 19.087328,
+   "lng": 72.827075,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "oMzmvR_4O6KDAwWEyCbU-g",
+   "lat": 19.071545,
+   "lng": 72.830188,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "riRUIL1KZl834ktS4wv6Kg",
+   "lat": 19.088211,
+   "lng": 72.834388,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "0rqsk70DkHXVQkn_qUYZwA",
+   "lat": 19.084799,
+   "lng": 72.842979,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "PGIvwXmlx1Fkq7jAiCAsMQ",
+   "lat": 19.088728,
+   "lng": 72.841839,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "MlvyTaZ-67HbIWtcXNvpJQ",
+   "lat": 19.067026,
+   "lng": 72.836423,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "dyJ2SwGUzWgBcILSD6pN-w",
+   "lat": 19.065807,
+   "lng": 72.825601,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "xqW0JEHksT9CavRhJoeSLQ",
+   "lat": 19.088704,
+   "lng": 72.838219,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "szcIxkHDecdOktz3LkfpCQ",
+   "lat": 19.090821,
+   "lng": 72.83428,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "NnuWp55qI7wDcW1wAd8s9A",
+   "lat": 19.071056,
+   "lng": 72.825528,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "x5OYopfBzsbAaOGAfNrvYQ",
+   "lat": 19.085314,
+   "lng": 72.840769,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "V9ZJCqhoPV06qF0J54oSVw",
+   "lat": 19.082942,
+   "lng": 72.834615,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "o84Ct3TgbHEmFhgPygssLQ",
+   "lat": 19.065814,
+   "lng": 72.826592,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Dhe5l5dpP8S7AoowsBpGRA",
+   "lat": 19.065561,
+   "lng": 72.828269,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Pf9ifuEDwKNClOlEPhz9tg",
+   "lat": 19.07031,
+   "lng": 72.837487,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "r57MuIWCrDP9UCZ7dibRcw",
+   "lat": 19.08783,
+   "lng": 72.835271,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "AcWnq-j9eUp6cao52yb_sA",
+   "lat": 19.07283,
+   "lng": 72.825194,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "4glJUFEght7Gfplh3Kvfiw",
+   "lat": 19.070621,
+   "lng": 72.822421,
+   "date": "2021-12",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "47GDYfL492CKqD_Lk1CnZg",
+   "lat": 19.086869,
+   "lng": 72.829095,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "fpGlGXv7CzuhaaDOyWYq3g",
+   "lat": 19.072849,
+   "lng": 72.831965,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "iihGVkQqxXfWvLXLKBTQXw",
+   "lat": 19.090816,
+   "lng": 72.834767,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "BaODk0gtv8RrGmYMWVIwhw",
+   "lat": 19.076575,
+   "lng": 72.834304,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "L4Wp55qlufOFq3bSojsA_Q",
+   "lat": 19.090541,
+   "lng": 72.843567,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "Eq4mjV55wKxVbQQvtx8i0Q",
+   "lat": 19.07506,
+   "lng": 72.839568,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "3_BCl68Bg9JPTRSuVk5J_g",
+   "lat": 19.071938,
+   "lng": 72.824176,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "USddPNhLDLvGngrmiJ9BMw",
+   "lat": 19.091898,
+   "lng": 72.847235,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "EWsSd5O65a1s8ho-bFuLSQ",
+   "lat": 19.083558,
+   "lng": 72.831679,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "f6M2cgBsTJNlLtp-BNQmNw",
+   "lat": 19.090136,
+   "lng": 72.840368,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "YamiKFECyCkX5pkZLTaE7A",
+   "lat": 19.072285,
+   "lng": 72.831908,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "U_1Ao2d2fEBYYeA8i9rgLA",
+   "lat": 19.070043,
+   "lng": 72.833618,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7ClEY3ouQ8mBEVwLQbcSWQ",
+   "lat": 19.09043,
+   "lng": 72.827618,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "5zdl2yBph9XZCJM-DoEDug",
+   "lat": 19.069997,
+   "lng": 72.829875,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "M9Rk0Q1iSLIPS1uiyjxGoQ",
+   "lat": 19.078979,
+   "lng": 72.837569,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "PS7ZfSAcwDAS_o7fFxeHUg",
+   "lat": 19.069343,
+   "lng": 72.834417,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "TdVNDqbeUIwEb68dOhvZ9Q",
+   "lat": 19.07476,
+   "lng": 72.82673,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "vUtxDLezcSdytlIf_v8Aew",
+   "lat": 19.074693,
+   "lng": 72.833275,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "63LPiiJT2glGBsxLUFpFeA",
+   "lat": 19.082033,
+   "lng": 72.837904,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "iNCwL9_-NS-4gSGnRrfAYQ",
+   "lat": 19.067086,
+   "lng": 72.824622,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "kP9u5TZvhP33XhN9SZCjNA",
+   "lat": 19.083713,
+   "lng": 72.84352,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "3PwNOs6pTNV46S3BB2sHzA",
+   "lat": 19.084085,
+   "lng": 72.84285,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "EU5Pd4j_UHAmd-UgxoLjEQ",
+   "lat": 19.078802,
+   "lng": 72.840278,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "elmI4hGbLpoh-jh21EmflQ",
+   "lat": 19.069139,
+   "lng": 72.842672,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ikJ1JfnqGnuyukG8VH_p7A",
+   "lat": 19.08024,
+   "lng": 72.843603,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJQ091Y1BBRlE.",
+   "lat": 19.090548,
+   "lng": 72.839935,
+   "date": "2022-06",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "PyNdouqYHaClDH57fVg0Yg",
+   "lat": 19.082802,
+   "lng": 72.83715,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "5pejFxrjHyt6Pj2TBNnlAw",
+   "lat": 19.081679,
+   "lng": 72.846046,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "00wf5MIvbLaoRhcaO68zzw",
+   "lat": 19.068176,
+   "lng": 72.837272,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "MSgwm9qnn5aML6_zCEvocg",
+   "lat": 19.070274,
+   "lng": 72.826362,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "LjdQKkwAkqGygIJaLFxmvg",
+   "lat": 19.086823,
+   "lng": 72.833905,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "smJsHWcBlgPj7ll9GwbBuA",
+   "lat": 19.066825,
+   "lng": 72.84396,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ePBtI6aFhexVcjRkxtMhTA",
+   "lat": 19.064648,
+   "lng": 72.834702,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "aPpRd6aMlWqfICQkNnSk5A",
+   "lat": 19.073593,
+   "lng": 72.83747,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "7r8SWm-XzEV0dttTs40IUw",
+   "lat": 19.080581,
+   "lng": 72.831937,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2R8lSL3-JWfP-_euS_vQiQ",
+   "lat": 19.085797,
+   "lng": 72.833436,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "KJ6oPXxLw61n9uqySf7GVw",
+   "lat": 19.074468,
+   "lng": 72.824105,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "b1FQbf_7veRbtrwNTGlOjw",
+   "lat": 19.078326,
+   "lng": 72.826316,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "q1aKugvgZRj5-0PHnb4DWQ",
+   "lat": 19.071518,
+   "lng": 72.824371,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "QFfrHwvSoxHgQEgsxBw1qQ",
+   "lat": 19.079564,
+   "lng": 72.833611,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "eEGhXFDahTKrplzkyUfOng",
+   "lat": 19.080698,
+   "lng": 72.840684,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "OKIPSkY81hnOxMMcISOiyQ",
+   "lat": 19.067173,
+   "lng": 72.838994,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Cc2efriI9STPz3Wl7mCIgQ",
+   "lat": 19.080384,
+   "lng": 72.846308,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2WfEoPhZBw76Rpcm6bTl5w",
+   "lat": 19.065481,
+   "lng": 72.830957,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "gNXLw0uVdUlCV6JYcXYaFA",
+   "lat": 19.074257,
+   "lng": 72.827923,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "SgD2wH55M7Y_Kwts8_w-ew",
+   "lat": 19.077467,
+   "lng": 72.837016,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "nHsWQ-7dqfxFo2aRM6Ji6w",
+   "lat": 19.065328,
+   "lng": 72.844349,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "R91TTEj3ZHdSmF4x64k-Bg",
+   "lat": 19.063953,
+   "lng": 72.830882,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "0GgiPfmlg8YO53fE3Cy38w",
+   "lat": 19.084537,
+   "lng": 72.839607,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "wvxY28mhYt9_cEcUmXtw0w",
+   "lat": 19.084751,
+   "lng": 72.832404,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "H8DHE8tWobTbHGXBeto3HA",
+   "lat": 19.091595,
+   "lng": 72.84443,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "lRkYfYPTEGCxyhA5IV80lg",
+   "lat": 19.066488,
+   "lng": 72.831057,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "oH6q3pbLpW38ltsqwRgGnw",
+   "lat": 19.065547,
+   "lng": 72.83336,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ZFvKdFgQTWIdo1X_iZ3tNw",
+   "lat": 19.087133,
+   "lng": 72.83266,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "V6u-BuNAWqbvqmTVvPS0dg",
+   "lat": 19.063898,
+   "lng": 72.834738,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "5pU_YZeyQ-UqgDBnQHnPUw",
+   "lat": 19.064134,
+   "lng": 72.836503,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "w-D34_7soROvmbdpEoxZ3g",
+   "lat": 19.065643,
+   "lng": 72.823192,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "QLh2sdH3eqjYO9JFxufyZA",
+   "lat": 19.069836,
+   "lng": 72.837469,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "z1HIhJCmlGGL4H5t9cIR9Q",
+   "lat": 19.072898,
+   "lng": 72.827003,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "l0sV2E783OPbo3G0Puhrjg",
+   "lat": 19.0713,
+   "lng": 72.828145,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "0MMz-tB0jPszt1PNp-g86A",
+   "lat": 19.073262,
+   "lng": 72.829078,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ixfUPFxe33eyQnCwJ-Ml8A",
+   "lat": 19.085116,
+   "lng": 72.838185,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "JZlQyA0qOLRj77w9sFmArg",
+   "lat": 19.074944,
+   "lng": 72.827906,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2TItAcUycsBfzaTEe1k7UQ",
+   "lat": 19.065907,
+   "lng": 72.829936,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "EdKtiQ4_STpovGhIvrBdrg",
+   "lat": 19.087975,
+   "lng": 72.841411,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSHENJQUJJaENpR2hGSkY0WDhwWVNkRy1qZmFUdGM.",
+   "lat": 19.067579,
+   "lng": 72.832273,
+   "date": "2026-09",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "DKHAoQA_aDRtDqpyyXcjRg",
+   "lat": 19.079468,
+   "lng": 72.830072,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "XkmREbU3MtmIyCwrnwk-YQ",
+   "lat": 19.076356,
+   "lng": 72.836226,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "6M4pB5kC07aume0lcru-Pg",
+   "lat": 19.080748,
+   "lng": 72.832461,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "9McQTIc1MPSa_vJDy8eYaw",
+   "lat": 19.07401,
+   "lng": 72.839429,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2boDYAv2l3t2kev47uoyLQ",
+   "lat": 19.075337,
+   "lng": 72.826016,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "uocmrR40vqMuGnHlNOUn6g",
+   "lat": 19.08002,
+   "lng": 72.837942,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "dz0Q1FyZ_6qLtco9kkfIHA",
+   "lat": 19.080847,
+   "lng": 72.83927,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7WQhztOYOUICCxjMhDtT7g",
+   "lat": 19.086111,
+   "lng": 72.839902,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "scv9qhi0ppW8qhiR46fC2A",
+   "lat": 19.080831,
+   "lng": 72.847356,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "9AddGbNOV8nLmtcasaMQzQ",
+   "lat": 19.071259,
+   "lng": 72.836008,
+   "date": "2021-12",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "0A1LnzWal3opeyQt_1k6JQ",
+   "lat": 19.066835,
+   "lng": 72.841957,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "tgRcXMBf08UXYxMK5bBJjQ",
+   "lat": 19.063579,
+   "lng": 72.842958,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "4f8xA8ziMq5LfcXCOrjYpw",
+   "lat": 19.084862,
+   "lng": 72.828543,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "aiM730qllGALRZoHm7SJyQ",
+   "lat": 19.083557,
+   "lng": 72.826297,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Rtp0uN1VY0ukLFlcxDsTGA",
+   "lat": 19.082694,
+   "lng": 72.842389,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "-zR-lSET3DUV5ql5hgBYmg",
+   "lat": 19.066027,
+   "lng": 72.844037,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "igz712nKb6qG6X8lTFQMXQ",
+   "lat": 19.077506,
+   "lng": 72.843107,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "2a5s4eEfhawYnH3tn1ZiSg",
+   "lat": 19.078818,
+   "lng": 72.836534,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "YO1evHPXG5w4jfT8ni4DhQ",
+   "lat": 19.084196,
+   "lng": 72.839901,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7CBgQQ0hfOPfIpQs8mREqA",
+   "lat": 19.083307,
+   "lng": 72.834628,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "DkPYCuJ-a30wFzarpVg7VQ",
+   "lat": 19.078672,
+   "lng": 72.832872,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "b_qc0CPty_MzNZVqTgyGkw",
+   "lat": 19.076199,
+   "lng": 72.840524,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "1CLC2lPu4MkknvLo_K8Cdg",
+   "lat": 19.081766,
+   "lng": 72.834487,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "Yn2EfRNYn1619VrOUsUc7g",
+   "lat": 19.078344,
+   "lng": 72.832067,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "YgC8CZGf7dX-futTK8U_zQ",
+   "lat": 19.078909,
+   "lng": 72.833613,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Op52VMtpBpapDFBSx-fk0g",
+   "lat": 19.079681,
+   "lng": 72.845567,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "3bSA7IhOIpy0XpWPQVSy0w",
+   "lat": 19.078814,
+   "lng": 72.834416,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "wJvhui5U6G0WCBy4ca6tvQ",
+   "lat": 19.068959,
+   "lng": 72.826945,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "AXzIzYPyngp7ztRuo5Hayw",
+   "lat": 19.08534,
+   "lng": 72.845551,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "PKlAwzp4oTtWm9aYyiIQmw",
+   "lat": 19.072939,
+   "lng": 72.83508,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "MbP9Jf00oaHAFM6ugPxALw",
+   "lat": 19.085432,
+   "lng": 72.837534,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "S3Fl8KyWa_bSUq4wIjZruQ",
+   "lat": 19.070239,
+   "lng": 72.839754,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "kqGX4ctS5RgKhJbMGEKt5w",
+   "lat": 19.074844,
+   "lng": 72.843417,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "kJmgnmx2umINsca7A0oP0A",
+   "lat": 19.08781,
+   "lng": 72.828783,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "wENtsBEP4FO8ZubfmxwymQ",
+   "lat": 19.074351,
+   "lng": 72.831144,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "olbo3fJUJ26IvHUoWOdMgg",
+   "lat": 19.073198,
+   "lng": 72.843756,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "c3DDAaTYnQe1QnHhTY7WgA",
+   "lat": 19.074225,
+   "lng": 72.825627,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "sFkd3eCbww_3WcULr-tPFA",
+   "lat": 19.076428,
+   "lng": 72.847183,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "CAoSHENJQUJJaEN1b0Q2M2hYZGlrTURjNnV3SjNfUHI.",
+   "lat": 19.06597,
+   "lng": 72.824119,
+   "date": "2026-07",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "FqEprRk73T8lt0I8nVEKyg",
+   "lat": 19.073855,
+   "lng": 72.830171,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSHENJQUJJaEE2c1lQYzcxQXQ0WGhzTGJ3aFA4TDE.",
+   "lat": 19.089962,
+   "lng": 72.841745,
+   "date": "2025-06",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "oNONkp5JF5jjVQI7DKgwFQ",
+   "lat": 19.064405,
+   "lng": 72.844424,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSF0NJSE0wb2dLRUlDQWdJRHBnYnZ0aHdF",
+   "lat": 19.06531,
+   "lng": 72.829548,
+   "date": "2023-08",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yZD9XO4xz1_sBddDUj5o4Q",
+   "lat": 19.083434,
+   "lng": 72.838093,
+   "date": "2024-11",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "KPogoRtQXeKKZEV8WrjLpQ",
+   "lat": 19.085864,
+   "lng": 72.828446,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "lEGjZf6TDzrdVZAh_juVPg",
+   "lat": 19.079787,
+   "lng": 72.8436,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "r6sWkSkAZ0h78ZaUrK2ifA",
+   "lat": 19.067888,
+   "lng": 72.834418,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "M4v2-GeUQKHPEbmgIvmtmg",
+   "lat": 19.070084,
+   "lng": 72.835548,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "3jXxZ5at8BtlNeXILnjAcw",
+   "lat": 19.063808,
+   "lng": 72.831677,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "1g0DE2bXneQF7pIBpycjqg",
+   "lat": 19.082296,
+   "lng": 72.842903,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "uK_XKl1e89vjozspcN2Hcg",
+   "lat": 19.072522,
+   "lng": 72.827268,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "oh_SQrE1PhBHyBXLM-_bWA",
+   "lat": 19.067478,
+   "lng": 72.837408,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "o-HgkItvzWX6aq2SddzOvw",
+   "lat": 19.075259,
+   "lng": 72.840129,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "CAoSHENJQUJJaENCS3UyWG5yUzF3QTBMNVRueE5YMXg.",
+   "lat": 19.0813,
+   "lng": 72.834748,
+   "date": "2025-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "uHv06XqyiKgTysMwJvfg9w",
+   "lat": 19.079578,
+   "lng": 72.828231,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "KB6jhzpIXG3zmKiH9JjUVA",
+   "lat": 19.077256,
+   "lng": 72.832022,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "YSwPSjMe7JLeCsgsd-9qlA",
+   "lat": 19.069266,
+   "lng": 72.843495,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "To4Z_6NpXerqit9Ek0fyHg",
+   "lat": 19.070703,
+   "lng": 72.835591,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yBOr_aO7AgxWLx0v9m_Auw",
+   "lat": 19.073916,
+   "lng": 72.825925,
+   "date": "2024-11",
+   "road": "living_street",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "NM1kcN2W7W2CkJ8ATUshaQ",
+   "lat": 19.073712,
+   "lng": 72.829809,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "ZWnt41iPnzDZZKdzB67nnw",
+   "lat": 19.068259,
+   "lng": 72.839106,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "w3kT4DDEzKriT1MBMAiS0g",
+   "lat": 19.071662,
+   "lng": 72.838313,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "iIOGUFEydn4Myp7rLXSG0g",
+   "lat": 19.075403,
+   "lng": 72.837556,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "EQqytBXUT78iCkfHfObC3Q",
+   "lat": 19.079584,
+   "lng": 72.846697,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "vykevkIHq7lIOX4Asu-EKg",
+   "lat": 19.06482,
+   "lng": 72.831745,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "uaZaI8P9AV24r6mA5fq5gA",
+   "lat": 19.069345,
+   "lng": 72.833702,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "MgCNWKMFbfpgfvpzCpuwEQ",
+   "lat": 19.071949,
+   "lng": 72.830314,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "g9CrFRDVPzcpOTmOEV5l4Q",
+   "lat": 19.065552,
+   "lng": 72.843163,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "kD3nl1OHm_8j6cA3sY5E1A",
+   "lat": 19.085421,
+   "lng": 72.830046,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "p4gcJs6gXbSeUbpkbfvPXw",
+   "lat": 19.083172,
+   "lng": 72.839698,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "DSHTl-QhE0T1pgIohsfZkQ",
+   "lat": 19.068575,
+   "lng": 72.83447,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "gYleZWYYkS_eTGafqg7lHA",
+   "lat": 19.076905,
+   "lng": 72.834051,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "GSZNuwQB1ARQgpJ761ZrvA",
+   "lat": 19.067544,
+   "lng": 72.847263,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "gCBI6yoBeaX0STvpG64cXQ",
+   "lat": 19.082423,
+   "lng": 72.830993,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "sJA9A1441KDrs4lQMmQV2g",
+   "lat": 19.071487,
+   "lng": 72.831257,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yQJ9n8ES0UYcO4NxL30NEA",
+   "lat": 19.076762,
+   "lng": 72.835482,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "5hH4V62dwNs4ToWSqoCVFg",
+   "lat": 19.079944,
+   "lng": 72.827682,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "sA2enkIgE7hHbi9pk9G9pQ",
+   "lat": 19.086197,
+   "lng": 72.838233,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "eUCx3Rqx-wIEhjDgn3opHQ",
+   "lat": 19.081224,
+   "lng": 72.830268,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "Hb7XoWPFHf7NtC88CZAP_g",
+   "lat": 19.086777,
+   "lng": 72.844973,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "qnvG2ueqsxRZcoN_uhGe5Q",
+   "lat": 19.070709,
+   "lng": 72.837366,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "QDkg0X3bsnq0vCsFRp54bg",
+   "lat": 19.087619,
+   "lng": 72.84425,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "QygrHcgFfAww6IjzjX7KqA",
+   "lat": 19.089434,
+   "lng": 72.834109,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ti51gOWG8ZglD3PVmiZ2-A",
+   "lat": 19.082238,
+   "lng": 72.835359,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "_zoPRFlYw6IUXn48VuH1zQ",
+   "lat": 19.085752,
+   "lng": 72.84531,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "gVXuWIaRjCAgcXAkcyAJUg",
+   "lat": 19.063893,
+   "lng": 72.824743,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7yk_UoP5XhA5gcq-mWazAg",
+   "lat": 19.090115,
+   "lng": 72.832869,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Gt-9HVRJjo-dv2ezhRk2LA",
+   "lat": 19.081525,
+   "lng": 72.833669,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "RZPw78N7CHJGGBHQJrvS-Q",
+   "lat": 19.090631,
+   "lng": 72.841478,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "b9pad2xcwQ4eN0jqzhhIHg",
+   "lat": 19.080465,
+   "lng": 72.844799,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "1gbRO-vIDO3ZlZeAUapMcg",
+   "lat": 19.06632,
+   "lng": 72.835056,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "sYvPr5x4TUQDlP2Q6qIPwg",
+   "lat": 19.075255,
+   "lng": 72.824227,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "iSZ269JK_eP4EV2LYBeC3Q",
+   "lat": 19.067569,
+   "lng": 72.830556,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Ix0aVISpPAZxmAx8MH45DA",
+   "lat": 19.065737,
+   "lng": 72.836254,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "imsjNy_KFyVSUHGIPrRiZA",
+   "lat": 19.088081,
+   "lng": 72.833482,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "NNGKwZg6EwMc9JAJDWwqxg",
+   "lat": 19.089764,
+   "lng": 72.837569,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "ngpqAczBQaaMRSysvdQdPQ",
+   "lat": 19.086879,
+   "lng": 72.827404,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "mpAn9t7mPltbIjzPLtKV2Q",
+   "lat": 19.0748,
+   "lng": 72.832698,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "6_K2Mgt8_5HrNy4A9UX_bw",
+   "lat": 19.068482,
+   "lng": 72.847047,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "EM63LYwt-wsDGt_1m6VkVA",
+   "lat": 19.072673,
+   "lng": 72.832337,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yG795Zuu6TwiUbFciOT-zg",
+   "lat": 19.079991,
+   "lng": 72.830865,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "iMmmJ0_JkkKGTEeGb_c0Bg",
+   "lat": 19.086655,
+   "lng": 72.838064,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Qp4Itj3iuFQYPv-gpa-xPg",
+   "lat": 19.089977,
+   "lng": 72.827574,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "sS7-Dv6h4PsmolEDeL7TLA",
+   "lat": 19.090814,
+   "lng": 72.832707,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "FsRY4Cj6FaleywR5QOcBpg",
+   "lat": 19.072548,
+   "lng": 72.84648,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "QKrazNemjcq-LmkOp9b0Mg",
+   "lat": 19.075621,
+   "lng": 72.826584,
+   "date": "2024-11",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "ZKx5l56TztDo1s-XuUnZfw",
+   "lat": 19.069942,
+   "lng": 72.847082,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "UqdTy-i-aARAPWORvv1Pow",
+   "lat": 19.072108,
+   "lng": 72.824935,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "qmMR02TH2GyBG7QwboALBg",
+   "lat": 19.086671,
+   "lng": 72.834635,
+   "date": "2026-03",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "FGgArRYDn1ufMl524VWwcQ",
+   "lat": 19.076273,
+   "lng": 72.83277,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "RJ8q3KiI8lkSdCX7VlMcwA",
+   "lat": 19.077466,
+   "lng": 72.847218,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "Gb43-TpdAgZhzjnbwomc8Q",
+   "lat": 19.066734,
+   "lng": 72.83729,
+   "date": "2026-02",
+   "road": "primary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "H8EDPYfeCRLqCIa8Xy2O9g",
+   "lat": 19.089473,
+   "lng": 72.840474,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7UHD6A7tho9Kr7jjunVQSw",
+   "lat": 19.084548,
+   "lng": 72.834582,
+   "date": "2024-11",
+   "road": "secondary",
+   "difficulty": "easy"
+  },
+  {
+   "pano_id": "dGUfKjObjRNU27DMvFlH6g",
+   "lat": 19.077065,
+   "lng": 72.830608,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "7mhjQ0XsvJAGn1XZlDdexg",
+   "lat": 19.084268,
+   "lng": 72.836017,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "-K23pM9a7JPmiXnuOZXZ3w",
+   "lat": 19.070662,
+   "lng": 72.824007,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "nHaGi9JGNcdxi9Kf78LkRw",
+   "lat": 19.081991,
+   "lng": 72.84367,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "lw32E1Eufq6HgZmD2cHXNA",
+   "lat": 19.076553,
+   "lng": 72.842314,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "pc5eesJYeOgWNHVnNyiaPA",
+   "lat": 19.070058,
+   "lng": 72.832999,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "nVpstGy7egTX4qMHYZMA2Q",
+   "lat": 19.090723,
+   "lng": 72.833532,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "ucdxplVmPahFuzwyG9PXQg",
+   "lat": 19.086283,
+   "lng": 72.844638,
+   "date": "2026-03",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "gCDG15WMihMh2Z8qrMlFPA",
+   "lat": 19.066744,
+   "lng": 72.834859,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJQ0JzWjNfTkE.",
+   "lat": 19.07334,
+   "lng": 72.844755,
+   "date": "2022-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "F-kqw9bk2ub44FWSFRIlTA",
+   "lat": 19.074996,
+   "lng": 72.826253,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "Tanq0W4UEm0-wEk_MTysEA",
+   "lat": 19.083557,
+   "lng": 72.84271,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "acNP_qF0w6nyqZvRwkmSQA",
+   "lat": 19.076175,
+   "lng": 72.82821,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "qsS_pG_-p2piqPe9Q1ek8g",
+   "lat": 19.069188,
+   "lng": 72.837989,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "9kJGHXn4T6PzDboKupNcpg",
+   "lat": 19.085169,
+   "lng": 72.843036,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "IZxdJX9pRwM8aZPwlhB_uQ",
+   "lat": 19.066474,
+   "lng": 72.828552,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "NVRw71XdFzQDXReY1yKKyA",
+   "lat": 19.081563,
+   "lng": 72.835833,
+   "date": "2021-12",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "yWjjHfhVNVecG47O4-ZNsg",
+   "lat": 19.072709,
+   "lng": 72.836476,
+   "date": "2026-02",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "KDPp7VHcxptluQ6k61eZtQ",
+   "lat": 19.064819,
+   "lng": 72.846972,
+   "date": "2026-03",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "EDb3wmjlBekUKTKHJZtXXw",
+   "lat": 19.067664,
+   "lng": 72.836826,
+   "date": "2026-02",
+   "road": "tertiary",
+   "difficulty": "medium"
+  },
+  {
+   "pano_id": "CAoSFkNJSE0wb2dLRUlDQWdJQ04tNnVXWEE.",
+   "lat": 19.079727,
+   "lng": 72.840695,
+   "date": "2024-01",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "AQyRJsSuEUCbu7NUUj39uw",
+   "lat": 19.084663,
+   "lng": 72.838157,
+   "date": "2024-11",
+   "road": "residential",
+   "difficulty": "hard"
+  },
+  {
+   "pano_id": "gGg0JanJlMSjzpw7wmzEzw",
+   "lat": 19.073199,
+   "lng": 72.831028,
+   "date": "2026-02",
+   "road": "secondary",
+   "difficulty": "easy"
+  }
+ ]
+}
