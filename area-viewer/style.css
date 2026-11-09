@@ -1,0 +1,515 @@
+/* ==========================================================================
+   Area Viewer: styles
+   1. Design tokens (colours, type, spacing)   <- change the look here
+   2. Base
+   3. Top bar
+   4. Map and map labels
+   5. Side panel
+   6. Small screens
+   ========================================================================== */
+
+
+/* ---------- 1. Design tokens ---------------------------------------------- */
+
+@font-face {
+  font-family: "Archivo Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  src: url("lib/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+}
+
+:root {
+  /* Surfaces and ink: cool survey-sheet paper with deep teal ink */
+  --paper:      #e8edea;
+  --surface:    #f6f8f5;
+  --ink:        #12262e;
+  --ink-soft:   #4b5f67;
+  --rule:       #c5d0ce;
+  --sea:        #d3e2e8;
+  --focus:      #0f6a9b;
+  --hover:      rgba(18, 38, 46, 0.06);
+  --caution-bg: #f3ead2;
+  --caution-ink:#5b4510;
+
+  /* Area palette: eight muted colours; neighbours always get different ones */
+  --c0: #a8cba2;  --c1: #ebc26f;  --c2: #8fb6da;  --c3: #db9a98;
+  --c4: #b9aad8;  --c5: #7ccbc4;  --c6: #e7a783;  --c7: #cad57f;
+
+  /* Map drawing */
+  --fill-alpha:   0.58;
+  --edge:         #f6f8f5;   /* thin line between neighbouring areas */
+  --select:       #12262e;   /* outline of the selected area */
+  --outline:      #12262e;   /* dashed overlay outlines */
+  --label-ink:    #12262e;
+  --label-halo:   rgba(246, 248, 245, 0.95);
+
+  /* Type */
+  --font: "Archivo Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --text-s: 0.8125rem;   /* 13 */
+  --text-m: 0.9375rem;   /* 15 */
+  --text-l: 1.375rem;    /* 22 */
+
+  /* Space and shape */
+  --gap: 12px;
+  --pad: 16px;
+  --radius: 5px;
+  --panel-width: 384px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:      #0e1a20;
+    --surface:    #15252d;
+    --ink:        #e4edef;
+    --ink-soft:   #9ab0b8;
+    --rule:       #2a3f47;
+    --sea:        #12232b;
+    --focus:      #5bb6e6;
+    --hover:      rgba(228, 237, 239, 0.07);
+    --caution-bg: #3a3016;
+    --caution-ink:#ecd9a0;
+
+    --c0: #5e8f63;  --c1: #b58f3c;  --c2: #4f7fa8;  --c3: #a95f5d;
+    --c4: #7a69a8;  --c5: #3f9690;  --c6: #b87249;  --c7: #8e9a3e;
+
+    --fill-alpha:   0.62;
+    --edge:         #0e1a20;
+    --select:       #ffffff;
+    --outline:      #e4edef;
+    --label-ink:    #f1f6f7;
+    --label-halo:   rgba(14, 26, 32, 0.92);
+  }
+}
+
+
+/* ---------- 2. Base --------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--text-m)/1.45 var(--font);
+  -webkit-text-size-adjust: 100%;
+}
+
+button, input, select { font: inherit; color: inherit; }
+
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+[hidden] { display: none !important; }
+
+.app {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);   /* never let the top bar widen the page */
+  height: 100vh;
+  height: 100dvh;
+}
+
+
+/* ---------- 3. Top bar ------------------------------------------------------ */
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap) 24px;
+  padding: 10px var(--pad);
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand { display: flex; align-items: baseline; gap: 10px; }
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 720;
+  font-stretch: 78%;
+  letter-spacing: 0.005em;
+}
+
+.city {
+  font-weight: 560;
+  font-stretch: 90%;
+  color: var(--ink-soft);
+}
+
+.city select {
+  border: 0;
+  background: transparent;
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+/* The five boundary types: one segmented control, coarse to fine as listed in config */
+.cats {
+  display: flex;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 100%;
+}
+.cats::-webkit-scrollbar { display: none; }
+
+.cat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--rule);
+  font-weight: 560;
+  font-stretch: 92%;
+  white-space: nowrap;
+}
+.cat:last-child { border-right: 0; }
+.cat:hover { background: var(--hover); }
+.cat:focus-visible { outline-offset: -3px; }
+
+.cat .n {
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.cat[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.cat[aria-pressed="true"] .n { color: inherit; opacity: 0.75; }
+
+.view-opts {
+  display: flex;
+  align-items: center;
+  gap: 8px 18px;
+  margin-left: auto;
+  font-size: var(--text-s);
+}
+
+.tool {
+  padding: 6px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.tool:hover, .tool[aria-expanded="true"] { background: var(--paper); }
+
+/* Settings pane: a small popover under the Settings button */
+.settings { position: relative; }
+.settings-pane {
+  position: absolute;
+  z-index: 1200;
+  top: calc(100% + 6px);
+  right: 0;
+  display: grid;
+  gap: 12px;
+  width: max-content;
+  max-width: 80vw;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+}
+.settings-pane[hidden] { display: none; }
+.opt-field { flex-direction: column; align-items: stretch; gap: 4px; }
+
+.opt { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
+.opt select {
+  padding: 5px 8px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  color: var(--ink);
+}
+.opt-check input { width: 16px; height: 16px; accent-color: var(--ink); margin: 0; }
+.opt-check { cursor: pointer; }
+
+
+/* ---------- 4. Map and map labels ------------------------------------------- */
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--panel-width);
+  min-height: 0;
+}
+
+/* Panel hidden: the map takes the full width (or height on phones) */
+.panel-hidden .stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); }
+.panel[hidden] { display: none; }
+
+.map-wrap { position: relative; min-height: 0; background: var(--sea); }
+
+.map { position: absolute; inset: 0; background: var(--sea); font-family: var(--font); }
+
+.banner {
+  position: absolute;
+  z-index: 1000;
+  left: var(--pad);
+  right: var(--pad);
+  top: var(--pad);
+  max-width: 520px;
+  padding: 12px 14px;
+  background: var(--caution-bg);
+  color: var(--caution-ink);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+/* Area names drawn on the map: condensed, like a municipal ward plate */
+.area-label { pointer-events: none; }
+.area-label span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font: 650 11px/1 var(--font);
+  font-stretch: 70%;
+  letter-spacing: 0.01em;
+  color: var(--label-ink);
+  text-shadow:
+    0 0 2px var(--label-halo), 0 0 2px var(--label-halo),
+    0 0 4px var(--label-halo), 0 0 4px var(--label-halo);
+}
+.labels-off .area-label { display: none; }
+.big-labels .area-label span { font-size: 13px; }
+
+.leaflet-tooltip.hover-tip {
+  padding: 4px 8px;
+  background: var(--ink);
+  color: var(--surface);
+  border: 0;
+  border-radius: 3px;
+  box-shadow: none;
+  font: 560 var(--text-s)/1.2 var(--font);
+  font-stretch: 92%;
+}
+.leaflet-tooltip-top.hover-tip::before { border-top-color: var(--ink); }
+
+.leaflet-container { font-family: var(--font); background: var(--sea); }
+.leaflet-container a { color: var(--focus); }
+.leaflet-control-attribution { background: color-mix(in srgb, var(--surface) 80%, transparent) !important; color: var(--ink-soft); }
+.leaflet-bar a { background: var(--surface); color: var(--ink); border-bottom-color: var(--rule); }
+.leaflet-bar a:hover { background: var(--paper); }
+.leaflet-bar { border: 1px solid var(--rule); box-shadow: none; }
+.leaflet-container path.leaflet-interactive:focus { outline: none; }
+
+
+/* ---------- 5. Side panel --------------------------------------------------- */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--rule);
+}
+
+.note { padding: var(--pad) var(--pad) 12px; }
+.note p { margin: 0; }
+.note .about { font-size: var(--text-m); }
+.note .vintage { margin-top: 6px; font-size: var(--text-s); color: var(--ink-soft); }
+.note .caution {
+  margin-top: 10px;
+  padding: 8px 10px;
+  font-size: var(--text-s);
+  background: var(--caution-bg);
+  color: var(--caution-ink);
+  border-radius: var(--radius);
+}
+
+/* The layer note gives way to the selected area's card; the caution moves into the card */
+.panel.has-detail .note { display: none; }
+
+.detail .caution {
+  margin: 12px 0 0;
+  padding: 8px 10px;
+  font-size: var(--text-s);
+  background: var(--caution-bg);
+  color: var(--caution-ink);
+  border-radius: var(--radius);
+}
+
+/* Selected area */
+.detail {
+  max-height: 55%;
+  flex: 0 0 auto;   /* keep its full height (up to the max); the list below takes the rest */
+  overflow: auto;
+  padding: 14px var(--pad) 16px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.detail-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.detail h2 {
+  margin: 0;
+  font-size: var(--text-l);
+  font-weight: 700;
+  font-stretch: 82%;
+  line-height: 1.15;
+}
+.detail .kind { margin: 3px 0 0; font-size: var(--text-s); color: var(--ink-soft); }
+
+.close {
+  flex: 0 0 auto;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-size: var(--text-s);
+}
+.close:hover { background: var(--hover); }
+
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 14px 0 0; font-size: var(--text-s); }
+.facts dt { color: var(--ink-soft); }
+.facts dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+.where { margin-top: 16px; }
+.where h3 { margin: 0 0 6px; font-size: var(--text-s); font-weight: 650; }
+.rel { display: grid; grid-template-columns: 6.6rem 1fr; gap: 3px 12px; padding: 7px 0; border-top: 1px solid var(--rule); font-size: var(--text-s); }
+.rel .cat-name { color: var(--ink-soft); }
+.rel .lines > div + div,
+.rel .lines > details { margin-top: 3px; }
+.rel .lead { color: var(--ink-soft); margin-right: 4px; }
+.rel summary { cursor: pointer; color: var(--ink-soft); }
+.rel details > div { margin-top: 3px; }
+
+.link {
+  padding: 0;
+  margin: 0 8px 0 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px dotted currentColor;
+  color: var(--ink);
+  font-size: inherit;
+  font-weight: 560;
+  line-height: 1.5;
+}
+.link:hover { color: var(--focus); }
+.link .pct { font-weight: 400; color: var(--ink-soft); }
+
+/* List of areas */
+.browse { display: flex; flex-direction: column; flex: 1 1 0; min-height: 140px; }
+
+.search { padding: 10px var(--pad) 6px; }
+.search input {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.search input::placeholder { color: var(--ink-soft); }
+.count { margin: 6px 2px 0; font-size: var(--text-s); color: var(--ink-soft); min-height: 1.2em; }
+
+.list { flex: 1 1 auto; margin: 0; padding: 0 0 8px; list-style: none; overflow: auto; }
+
+.item {
+  display: grid;
+  grid-template-columns: 12px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px var(--pad);
+  text-align: left;
+  background: none;
+  border: 0;
+}
+.item:hover { background: var(--hover); }
+.item[aria-current="true"] { background: var(--paper); box-shadow: inset 3px 0 0 var(--ink); }
+.item .swatch { width: 12px; height: 12px; border-radius: 2px; opacity: 0.9; }
+.item .nm { font-weight: 520; }
+.item .meta { font-size: var(--text-s); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.empty { padding: 12px var(--pad); color: var(--ink-soft); font-size: var(--text-s); }
+
+.credits {
+  padding: 10px var(--pad) 12px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+.credits p { margin: 0 0 4px; }
+.credits p:last-child { margin: 0; }
+
+
+/* ---------- 6. Small screens ------------------------------------------------ */
+
+@media (max-width: 860px) {
+  .stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: 52fr 48fr; }
+  .panel { border-left: 0; border-top: 1px solid var(--rule); }
+  .view-opts { margin-left: 0; width: 100%; justify-content: flex-end; }
+  .bar { gap: 8px 16px; padding: 8px var(--pad); }
+  .brand h1 { font-size: 1.125rem; }
+  .cat { padding: 8px 12px; }
+
+  /* With an area selected, show its details instead of the list */
+  .panel.has-detail .browse { display: none; }
+  .panel.has-detail .detail { max-height: none; flex: 1 1 auto; border-top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+
+/* ---------- My map (custom map builder) -------------------------------------- */
+
+.tool[aria-pressed="true"], .tool.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.tool.primary:disabled { opacity: 0.4; cursor: default; }
+#mine-btn .n { margin-left: 4px; font-variant-numeric: tabular-nums; opacity: 0.75; }
+
+.add-mine { margin: 12px 0 0; }
+.add-mine[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--ink); }
+
+/* In My map mode the panel shows only the builder (and the credits) */
+.panel.mode-mine .note,
+.panel.mode-mine .detail,
+.panel.mode-mine .browse { display: none; }
+
+.mine { flex: 1 1 0; min-height: 0; overflow: auto; padding: var(--pad); }
+.mine[hidden] { display: none; }
+.mine h2 { margin: 0 0 6px; font-size: 1.25rem; }
+.mine .about { margin: 0 0 14px; font-size: var(--text-m); }
+.mine .empty { color: var(--ink-soft); font-size: var(--text-s); }
+.mine .field { display: grid; gap: 4px; margin-bottom: 12px; font-size: var(--text-s); color: var(--ink-soft); }
+.mine .field input {
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+}
+.mine-list { margin: 0 0 14px; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+.mine-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.mine-list .kind { grid-column: 1; font-size: var(--text-s); color: var(--ink-soft); }
+.mine-list .nm { grid-column: 1; font-weight: 560; }
+.mine-list .close { grid-column: 2; grid-row: 1 / span 2; }
+.mine-actions { display: flex; gap: 8px; margin-bottom: 16px; }
+.mine-steps { font-size: var(--text-s); color: var(--ink-soft); }
+.mine-steps p { margin: 0 0 4px; }
+.mine-steps ol { margin: 0; padding-left: 20px; }
+.mine-steps li { margin-bottom: 4px; }
+.mine-steps code { padding: 1px 5px; color: var(--ink); background: var(--paper); border-radius: 4px; word-break: break-all; }

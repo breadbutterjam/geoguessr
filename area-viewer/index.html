@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Area Viewer</title>
+  <link rel="preload" href="lib/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="lib/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app" id="app">
+
+    <!-- Top bar: city, the five boundary types, and map options -->
+    <header class="bar">
+      <div class="brand">
+        <h1 id="app-title">Area Viewer</h1>
+        <span class="city" id="city-slot"></span>
+      </div>
+
+      <div class="cats" id="categories" role="group" aria-label="Boundary type"></div>
+
+      <!-- Custom map: areas collected from any tab, to download for the game -->
+      <button type="button" class="tool" id="mine-btn" aria-pressed="false">My map <span class="n" id="mine-count">0</span></button>
+
+      <div class="view-opts">
+        <!-- Settings pane: opens under this button -->
+        <div class="settings">
+          <button type="button" class="tool" id="settings-btn" aria-expanded="false" aria-controls="settings-pane">Settings</button>
+          <div class="settings-pane" id="settings-pane" role="group" aria-label="Map settings" hidden>
+            <label class="opt opt-check">
+              <input type="checkbox" id="focus-mode">
+              <span>Show only the selected area</span>
+            </label>
+            <label class="opt opt-check">
+              <input type="checkbox" id="place-names">
+              <span>Place names</span>
+            </label>
+            <label class="opt opt-field">
+              <span>Outlines of another type</span>
+              <select id="overlay" aria-label="Draw outlines of another boundary type"></select>
+            </label>
+          </div>
+        </div>
+        <button type="button" class="tool" id="panel-toggle" aria-controls="panel" aria-expanded="true">Hide panel</button>
+      </div>
+    </header>
+
+    <main class="stage">
+
+      <!-- Map -->
+      <div class="map-wrap">
+        <div id="map" class="map" role="region" aria-label="Map of areas"></div>
+        <div id="banner" class="banner" role="alert" hidden></div>
+      </div>
+
+      <!-- Side panel: what this layer is, the selected area, and the list -->
+      <aside class="panel" id="panel" aria-label="Areas">
+
+        <section class="note" id="note"></section>
+
+        <section class="detail" id="detail" aria-live="polite" hidden></section>
+
+        <section class="mine" id="mine" hidden></section>
+
+        <section class="browse" id="browse">
+          <div class="search">
+            <input type="search" id="search" placeholder="Search by name, number or PIN" autocomplete="off" aria-label="Search this list">
+            <p class="count" id="count" aria-live="polite"></p>
+          </div>
+          <ul class="list" id="list"></ul>
+        </section>
+
+        <footer class="credits" id="credits"></footer>
+      </aside>
+
+    </main>
+  </div>
+
+  <script src="lib/leaflet.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
