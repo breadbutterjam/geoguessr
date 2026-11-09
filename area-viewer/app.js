@@ -42,7 +42,7 @@
 
   let map, baseTiles, nameTiles, overlayLayer, selectedLayer, mineLayer;
   let mineKeys = [];        // "category/id" of every area in the custom map
-  let mineName = "My map";
+  let mineName = "";        // what the user typed; empty means "use the suggestion"
   let areaRenderer, outlineRenderer;
   let look = {};            // colours read from the CSS tokens
 
@@ -471,6 +471,16 @@
     if (state.mine) { buildMineLayer(); renderMine(); }
   }
 
+  /** A name made from the areas: "Vile Parle + Vandre West + 1 more". */
+  function suggestName() {
+    const names = mineItems().map((item) => item.feature.properties.name);
+    if (!names.length) return "My map";
+    const shown = names.slice(0, 2).join(" + ");
+    return names.length > 2 ? `${shown} + ${names.length - 2} more` : shown;
+  }
+
+  const currentName = () => mineName.trim() || suggestName();
+
   /** "bandra-and-khar" from "Bandra & Khar": the file name and map id. */
   function slug(name) {
     return name.toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "my-map";
@@ -514,21 +524,24 @@
     const fileNote = h("code", { id: "mine-file", text: "" });
     const download = h("button", { class: "tool primary", type: "button", onclick: downloadMine, text: "Download map file" });
     const refresh = () => {
-      const id = slug(mineName);
+      const id = slug(currentName());
       fileNote.textContent = `custom_maps/${id}.geojson`;
       download.disabled = !items.length;
       steps.textContent = `python generate_pool.py --map ${id}`;
     };
     const steps = h("code", { class: "cmd" });
     const nameInput = h("input", {
-      type: "text", value: mineName, maxlength: "40", "aria-label": "Map name",
-      oninput: (event) => { mineName = event.target.value.trim() || "My map"; saveMine(); refresh(); },
+      type: "text", value: mineName, maxlength: "60", placeholder: suggestName(), "aria-label": "Map name",
+      oninput: (event) => { mineName = event.target.value; saveMine(); refresh(); },
     });
+    const useAreas = h("button", { class: "tool", type: "button", text: "Use area names",
+      onclick: () => { mineName = ""; nameInput.value = ""; saveMine(); refresh(); } });
 
     fill(dom.mine,
       h("h2", { text: "My map" }),
       h("p", { class: "about", text: "Collect areas from any tab with “Add to my map”. Together they become one map for the game." }),
-      h("label", { class: "field" }, h("span", { text: "Map name" }), nameInput),
+      h("label", { class: "field" }, h("span", { text: "Map name (also the file name)" }),
+        h("span", { class: "name-row" }, nameInput, items.length ? useAreas : null)),
       items.length
         ? h("ul", { class: "mine-list" }, items.map((item) => h("li", {},
             h("span", { class: "kind", text: item.cat.singular }),
@@ -550,10 +563,11 @@
   function downloadMine() {
     const items = mineItems().filter((item) => item.feature);
     if (!items.length) return;
-    const id = slug(mineName);
+    const name = currentName();
+    const id = slug(name);
     const file = {
       type: "FeatureCollection",
-      map: { id, name: mineName, city: state.city },   // read by generate_pool.py
+      map: { name, city: state.city },   // the game shows "name"; the file name becomes the map id
       features: items.map((item) => ({
         type: "Feature",
         properties: { name: item.feature.properties.name, layer: item.cat.id },

@@ -152,7 +152,8 @@ def load_config(path=CONFIG_FILE):
         maps.append(merged)
 
     # Custom maps made in the Area Viewer: every custom_maps/*.geojson becomes a map.
-    # The file carries its own id and name (see the "map" entry inside it).
+    # The map id is the file name (khar-vile-parle.geojson -> khar-vile-parle): it names the pool file
+    # and is what you pass to --map. The name shown in the game is the "name" inside the file.
     taken = {m["id"] for m in maps}
     for file in sorted(glob.glob(os.path.join(CUSTOM_DIR, "*.geojson"))):
         try:
@@ -161,12 +162,12 @@ def load_config(path=CONFIG_FILE):
         except (OSError, ValueError) as err:
             print(f"  skipping {file}: {err}")
             continue
-        map_id = info.get("id") or os.path.splitext(os.path.basename(file))[0]
+        map_id = os.path.splitext(os.path.basename(file))[0]
         if map_id in taken:
-            print(f"  skipping {file}: a map with id '{map_id}' already exists")
+            print(f"  skipping {file}: another map already uses the id '{map_id}'")
             continue
         taken.add(map_id)
-        maps.append({**defaults, "id": map_id, "name": info.get("name") or map_id,
+        maps.append({**defaults, "id": map_id, "name": info.get("name") or map_id.replace("-", " ").replace("_", " ").title(),
                      "boundary": {"geojson": file}, "difficulty": dict(defaults.get("difficulty", {}))})
     return maps
 
@@ -496,6 +497,7 @@ def write_index(maps):
     """Writes site/pools/index.json: the list of playable maps the game shows in its menu."""
     os.makedirs(POOL_DIR, exist_ok=True)
     order = {m["id"]: i for i, m in enumerate(maps)}
+    names = {m["id"]: m["name"] for m in maps}   # a name changed in maps.json / a custom file wins
     entries = []
     for fn in sorted(os.listdir(POOL_DIR)):
         if not fn.endswith(".json") or fn == "index.json":
@@ -504,7 +506,7 @@ def write_index(maps):
             with open(os.path.join(POOL_DIR, fn), encoding="utf-8") as f:
                 d = json.load(f)
             counts = Counter(loc["difficulty"] for loc in d["locations"])
-            entries.append({"id": d["id"], "name": d["name"], "file": fn,
+            entries.append({"id": d["id"], "name": names.get(d["id"], d["name"]), "file": fn,
                             "count": len(d["locations"]), "counts": dict(counts),
                             "bbox": d.get("bbox"), "score_scale_m": d.get("score_scale_m")})
         except (ValueError, KeyError) as exc:

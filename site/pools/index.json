@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-09T08:09:37Z",
+ "generated_utc": "2026-11-09T14:04:36Z",
  "maps": [
   {
    "id": "mumbai",
@@ -56,8 +56,26 @@
    "score_scale_m": 687
   },
   {
+   "id": "hwestward",
+   "name": "HWestWard",
+   "file": "hwestward.json",
+   "count": 1000,
+   "counts": {
+    "hard": 693,
+    "easy": 194,
+    "medium": 113
+   },
+   "bbox": [
+    19.04029,
+    72.8172,
+    19.09057,
+    72.84322
+   ],
+   "score_scale_m": 622
+  },
+  {
    "id": "my-map",
-   "name": "My map",
+   "name": "Bandra to Juhu",
    "file": "my-map.json",
    "count": 1000,
    "counts": {
