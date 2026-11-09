@@ -24,6 +24,7 @@ Needs:  pip install requests   and   GOOGLE_MAPS_API_KEY set (only for generatio
 """
 import argparse
 import bisect
+import glob
 import json
 import math
 import os
@@ -37,6 +38,7 @@ from datetime import datetime, timezone
 import requests
 
 CONFIG_FILE = "maps.json"
+CUSTOM_DIR = "custom_maps"   # maps drawn in the Area Viewer ("My map" > Download) go here
 BOUNDARY_DIR, ROADS_DIR = "boundaries", "roads"
 # Pools are written inside the website folder so the game can load them.
 POOL_DIR = os.path.join("site", "pools")
@@ -148,6 +150,24 @@ def load_config(path=CONFIG_FILE):
         diff = {**defaults.get("difficulty", {}), **m.get("difficulty", {})}
         merged["difficulty"] = diff
         maps.append(merged)
+
+    # Custom maps made in the Area Viewer: every custom_maps/*.geojson becomes a map.
+    # The file carries its own id and name (see the "map" entry inside it).
+    taken = {m["id"] for m in maps}
+    for file in sorted(glob.glob(os.path.join(CUSTOM_DIR, "*.geojson"))):
+        try:
+            with open(file, encoding="utf-8") as f:
+                info = json.load(f).get("map", {})
+        except (OSError, ValueError) as err:
+            print(f"  skipping {file}: {err}")
+            continue
+        map_id = info.get("id") or os.path.splitext(os.path.basename(file))[0]
+        if map_id in taken:
+            print(f"  skipping {file}: a map with id '{map_id}' already exists")
+            continue
+        taken.add(map_id)
+        maps.append({**defaults, "id": map_id, "name": info.get("name") or map_id,
+                     "boundary": {"geojson": file}, "difficulty": dict(defaults.get("difficulty", {}))})
     return maps
 
 

@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-10-26T11:59:09Z",
+ "generated_utc": "2026-11-09T08:09:37Z",
  "maps": [
   {
    "id": "mumbai",
@@ -54,6 +54,24 @@
     72.85535
    ],
    "score_scale_m": 687
+  },
+  {
+   "id": "my-map",
+   "name": "My map",
+   "file": "my-map.json",
+   "count": 1000,
+   "counts": {
+    "easy": 178,
+    "hard": 712,
+    "medium": 110
+   },
+   "bbox": [
+    19.0405,
+    72.81751,
+    19.10397,
+    72.84692
+   ],
+   "score_scale_m": 770
   }
  ]
 }
