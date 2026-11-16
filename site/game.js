@@ -8,8 +8,9 @@
      5. Starting a game and a round
      6. Guessing and the timer
      7. Round result
-     8. Final screen
-     9. Boot
+     8. Final screen and personal bests
+     9. Player profile and leaderboard screens
+    10. Boot
    ========================================================================== */
 (function () {
   'use strict';
@@ -17,6 +18,8 @@
   /* ---------- 1. Setup and small helpers ---------- */
   const CFG = window.GAME_CONFIG;
   const Lib = window.GaliLib;
+  const MSG = window.GAME_MESSAGES;
+  const Board = window.GaliBoard;
   const $ = (id) => document.getElementById(id);
   const SCREENS = ['menu', 'game', 'result', 'final'];
   const KEY_PLACEHOLDER = 'PASTE_YOUR_BROWSER_KEY_HERE';
@@ -72,6 +75,7 @@
     guessMap: null, guessMarker: null,
     resultMap: null, resultOverlays: [],
     timerId: null,
+    lastMessage: null,           // the last closeness line shown, so it is not repeated
   };
 
   /* ---------- 3. Google Maps loading ---------- */
@@ -206,7 +210,6 @@
       state.game = {
         pool, entry,
         settings: Object.assign({}, sel),
-        scaleM: pool.score_scale_m * CFG.scoring.scaleMultiplier,
         locations: shuffled.slice(0, sel.rounds),
         spares: shuffled.slice(sel.rounds),
         roundIndex: 0, rounds: [], total: 0, retries: 0,
@@ -339,6 +342,7 @@
     chip.hidden = seconds <= 0;
     if (seconds <= 0) return;
     const deadline = Date.now() + seconds * 1000;
+    if (state.round) { state.round.limitMs = seconds * 1000; state.round.deadline = deadline; }
     const tick = () => {
       const left = Math.max(0, Math.ceil((deadline - Date.now()) / 1000));
       chip.textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')}`;
@@ -359,8 +363,26 @@
     const g = state.game;
     const truth = { lat: r.loc.lat, lng: r.loc.lng };
     const distanceM = r.guess ? Lib.haversineM(r.guess, truth) : null;
-    const points = Lib.scoreFor(distanceM, g.scaleM, CFG.scoring);
-    g.rounds.push({ loc: r.loc, guess: r.guess, distanceM, points });
+
+    // Distance score: the map's scale, adjusted for how hard this particular spot is.
+    const scaleM = Lib.scaleFor(g.pool.score_scale_m, r.loc, CFG.scoring);
+    const distancePoints = Lib.scoreFor(distanceM, scaleM, CFG.scoring);
+
+    // Time bonus (timed games only): by how much of the time was left, scaled by accuracy.
+    const timed = g.settings.timerSeconds > 0;
+    let remaining = null;
+    if (timed) {
+      remaining = timedOut || !r.guess ? 0
+        : Math.max(0, Math.min(1, (r.deadline - Date.now()) / r.limitMs));
+    }
+    const bonus = timed
+      ? Lib.timeBonusFor(remaining, distancePoints / CFG.scoring.maxPoints, CFG.timeBonus) : 0;
+    const points = distancePoints + bonus;
+
+    g.rounds.push({
+      loc: r.loc, guess: r.guess, distanceM, distancePoints, bonus, remaining, points,
+      max: Lib.roundMax(CFG.scoring, CFG.timeBonus, timed),
+    });
     g.total += points;
     showResult(g.rounds[g.rounds.length - 1], truth);
   }
@@ -379,6 +401,11 @@
     requestAnimationFrame(step);
   }
 
+  function distanceLabel(m) {
+    const d = Lib.formatDistance(m);
+    return d.value + ' ' + d.unit;
+  }
+
   function clearResultOverlays() {
     for (const o of state.resultOverlays) {
       if (typeof o.setMap === 'function') o.setMap(null); else o.map = null;
@@ -393,6 +420,11 @@
 
     // text
     const hasGuess = round.distanceM !== null;
+    const accuracy = round.distancePoints / CFG.scoring.maxPoints;
+    const picked = Lib.pickMessage(hasGuess ? accuracy : null, MSG,
+      hasGuess ? distanceLabel(round.distanceM) : '', state.lastMessage);
+    state.lastMessage = picked.raw;
+    $('result-message').textContent = picked.text;
     if (hasGuess) {
       const d = Lib.formatDistance(round.distanceM);
       $('result-lead').textContent = 'Your pin landed';
@@ -405,13 +437,20 @@
       $('result-distance-unit').textContent = '';
       $('result-sub').textContent = 'No pin was placed. The diamond shows where you were.';
     }
-    $('result-points-of').textContent = 'of ' + Lib.formatPoints(CFG.scoring.maxPoints);
+    $('result-points-of').textContent = 'of ' + Lib.formatPoints(round.max);
+    const timed = g.settings.timerSeconds > 0;
+    $('result-bonus').hidden = !timed;
+    if (timed) {
+      $('result-bonus').textContent = round.bonus > 0
+        ? `Distance ${Lib.formatPoints(round.distancePoints)} + time bonus ${Lib.formatPoints(round.bonus)}`
+        : `Distance ${Lib.formatPoints(round.distancePoints)} + no time bonus`;
+    }
     $('next-btn').textContent = last ? 'See final score' : 'Next round';
     animateNumber($('result-points'), round.points);
     const meter = $('result-meter');
     meter.style.setProperty('--pct', '0%');
     requestAnimationFrame(() => requestAnimationFrame(() =>
-      meter.style.setProperty('--pct', (round.points / CFG.scoring.maxPoints * 100) + '%')));
+      meter.style.setProperty('--pct', (round.points / round.max * 100) + '%')));
 
     // map
     const { Map, Polyline, AdvancedMarkerElement } = state.gm;
@@ -455,25 +494,66 @@
     startRound();
   }
 
-  /* ---------- 8. Final screen ---------- */
+  /* ---------- 8. Final screen and personal bests ---------- */
+
+  /* Personal bests live in this browser. They are keyed by the scoring version, so changing
+     how scoring works (config.scoring.version) starts them afresh. */
+  const BESTS_KEY = () => 'gali.bests.v' + CFG.scoring.version;
+
+  /**
+   * Compares a finished game with this browser's bests for the map.
+   * Returns { newAllTime, newDaily, allTime, daily } where the last two are the bests to show.
+   */
+  function updateLocalBests(record) {
+    const all = store.get(BESTS_KEY(), {});
+    const entry = all[record.mapId] || {};
+    const prevAll = entry.allTime || null;
+    const prevDay = entry.daily && entry.daily.dayKey === record.dayKey ? entry.daily : null;
+    const newAllTime = !prevAll || record.score10 > prevAll.score10;
+    const newDaily = !prevDay || record.score10 > prevDay.score10;
+    const slim = { score10: record.score10, dayKey: record.dayKey };
+    all[record.mapId] = {
+      allTime: newAllTime ? slim : prevAll,
+      daily: newDaily ? slim : prevDay,
+    };
+    store.set(BESTS_KEY(), all);
+    return {
+      newAllTime, newDaily,
+      firstEver: !prevAll, firstToday: !prevDay,
+      allTime: all[record.mapId].allTime, daily: all[record.mapId].daily,
+    };
+  }
+
+  function describeBests(b) {
+    const lines = [];
+    if (b.newAllTime && !b.firstEver) lines.push('New all-time best on this map!');
+    if (b.newDaily && !b.firstToday) lines.push('New best for today.');
+    if (!lines.length) {
+      lines.push(`Today's best ${b.daily.score10.toFixed(1)} · All-time best ${b.allTime.score10.toFixed(1)}`);
+    }
+    return lines.join(' ');
+  }
+
   function showFinal() {
     const g = state.game;
     const s = g.settings;
-    const maxTotal = CFG.scoring.maxPoints * g.locations.length;
+    const timed = s.timerSeconds > 0;
+    const maxTotal = g.rounds.reduce((sum, r) => sum + r.max, 0);
     showScreen('final');
 
     $('final-map').textContent = g.entry.name;
     $('final-total').textContent = Lib.formatPoints(g.total);
     $('final-max').textContent = 'of ' + Lib.formatPoints(maxTotal);
 
-    const bestKey = `gali.best.${s.mapId}.${s.difficulty}.${g.locations.length}`;
-    const previous = store.get(bestKey, 0);
-    if (g.total > previous) {
-      store.set(bestKey, g.total);
-      $('final-best').textContent = previous ? 'New best for this setup.' : '';
-    } else {
-      $('final-best').textContent = 'Best for this setup: ' + Lib.formatPoints(previous);
-    }
+    const record = {
+      mapId: s.mapId, dayKey: Lib.localDayKey(),
+      score10: Lib.scoreOutOfTen(g.total, maxTotal),
+      total: g.total, maxTotal, rounds: g.locations.length,
+      difficulty: s.difficulty, timer: s.timerSeconds, movement: s.movement,
+    };
+    $('final-score10').textContent = record.score10.toFixed(1) + ' out of 10';
+    const bests = updateLocalBests(record);
+    $('final-best').textContent = describeBests(bests);
 
     const list = $('final-rounds');
     list.replaceChildren();
@@ -483,12 +563,15 @@
       const n = document.createElement('span'); n.className = 'final-round-n'; n.textContent = String(i + 1);
       const dist = document.createElement('span'); dist.className = 'final-round-dist';
       if (r.distanceM === null) dist.textContent = 'No guess';
-      else { const d = Lib.formatDistance(r.distanceM); dist.textContent = d.value + ' ' + d.unit + ' away'; }
+      else {
+        dist.textContent = distanceLabel(r.distanceM) + ' away' +
+          (timed && r.bonus > 0 ? ' · +' + Lib.formatPoints(r.bonus) + ' time bonus' : '');
+      }
       const pts = document.createElement('span'); pts.className = 'final-round-pts';
       pts.textContent = Lib.formatPoints(r.points);
       const bar = document.createElement('span'); bar.className = 'final-round-bar';
       const fill = document.createElement('span');
-      fill.style.setProperty('--pct', (r.points / CFG.scoring.maxPoints * 100) + '%');
+      fill.style.setProperty('--pct', (r.points / r.max * 100) + '%');
       bar.appendChild(fill);
       const link = document.createElement('a');
       link.className = 'final-round-link'; link.textContent = 'Open this spot in Google Maps';
@@ -496,10 +579,141 @@
       li.append(n, dist, pts, bar, link);
       list.appendChild(li);
     });
+
+    // Shared leaderboard (only when Firebase is set up)
+    const boardBox = $('final-board');
+    boardBox.hidden = !Board.enabled;
+    if (Board.enabled) {
+      boardBox.replaceChildren(Object.assign(document.createElement('p'), { className: 'board-status', textContent: 'Saving your score…' }));
+      Board.submit(record)
+        .then(() => renderBoard(boardBox, s.mapId))
+        .catch((err) => {
+          console.warn('Leaderboard:', err);
+          boardBox.replaceChildren(Object.assign(document.createElement('p'), {
+            className: 'board-status', textContent: 'Could not reach the leaderboard. Your score is saved on this device.',
+          }));
+        });
+    }
     $('again-btn').focus();
   }
 
-  /* ---------- 9. Boot ---------- */
+  /* ---------- 9. Player profile and leaderboard screens ---------- */
+
+  /** An avatar as a small round picture: the image if the config has one, else the emoji. */
+  function avatarEl(id) {
+    const a = CFG.avatars.find((x) => x.id === id) || CFG.avatars[0];
+    const wrap = document.createElement('span');
+    wrap.className = 'avatar';
+    wrap.title = a.label;
+    const useEmoji = () => { wrap.replaceChildren(document.createTextNode(a.emoji)); };
+    if (a.src) {
+      const img = document.createElement('img');
+      img.src = a.src; img.alt = a.label; img.width = 32; img.height = 32;
+      img.addEventListener('error', useEmoji);
+      wrap.appendChild(img);
+    } else {
+      useEmoji();
+    }
+    return wrap;
+  }
+
+  /** "Playing as [avatar] Name" on the menu, with a button to change it. */
+  function renderPlayer() {
+    const box = $('player');
+    box.hidden = !Board.enabled;
+    if (!Board.enabled) return;
+    const p = Board.getProfile();
+    const btn = $('player-btn');
+    btn.replaceChildren(avatarEl(p.avatar), Object.assign(document.createElement('span'), { textContent: p.name }),
+      Object.assign(document.createElement('span'), { className: 'player-change', textContent: 'Change' }));
+  }
+
+  function openProfileDialog() {
+    const dialog = $('profile-dialog');
+    const p = Board.getProfile();
+    const input = $('profile-name');
+    input.value = p.name;
+    input.maxLength = CFG.leaderboard.nameMaxLength;
+    $('profile-error').textContent = '';
+    let chosen = p.avatar;
+    const grid = $('profile-avatars');
+    const paint = () => {
+      grid.replaceChildren(...CFG.avatars.map((a) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'avatar-choice'; b.setAttribute('role', 'radio');
+        b.setAttribute('aria-checked', String(a.id === chosen)); b.setAttribute('aria-label', a.label);
+        b.appendChild(avatarEl(a.id));
+        b.addEventListener('click', () => { chosen = a.id; paint(); });
+        return b;
+      }));
+    };
+    paint();
+    $('profile-save').onclick = () => {
+      const res = Board.saveProfile(input.value, chosen);
+      if (!res.ok) { $('profile-error').textContent = res.error; return; }
+      dialog.close();
+      renderPlayer();
+    };
+    $('profile-cancel').onclick = () => dialog.close();
+    dialog.showModal();
+    input.select();
+  }
+
+  /** Fills `root` with the Today / All time boards for one map. */
+  function renderBoard(root, mapId) {
+    const entry = state.index.maps.find((m) => m.id === mapId);
+    let kind = 'daily';
+    const dayKey = Lib.localDayKey();
+
+    const heading = Object.assign(document.createElement('h2'), { className: 'board-title', textContent: 'Leaderboard' });
+    const sub = Object.assign(document.createElement('p'), { className: 'board-sub', textContent: entry ? entry.name : '' });
+    const tabs = document.createElement('div'); tabs.className = 'segmented';
+    const status = Object.assign(document.createElement('p'), { className: 'board-status' });
+    const list = document.createElement('ol'); list.className = 'board-list';
+    root.replaceChildren(heading, sub, tabs, status, list);
+
+    const drawTabs = () => {
+      renderSegmented(tabs, [{ value: 'daily', label: 'Today' }, { value: 'allTime', label: 'All time' }], kind,
+        (v) => { kind = v; drawTabs(); load(); });
+    };
+    const load = async () => {
+      status.textContent = 'Loading…';
+      list.replaceChildren();
+      try {
+        const rows = await Board.top(kind, mapId, dayKey);
+        status.textContent = rows.length ? '' : (kind === 'daily' ? 'No scores yet today. Be the first.' : 'No scores yet.');
+        list.replaceChildren(...rows.map((r) => {
+          const li = document.createElement('li');
+          li.className = 'board-row' + (r.mine ? ' is-mine' : '');
+          const rank = Object.assign(document.createElement('span'), { className: 'board-rank', textContent: String(r.rank) });
+          const name = Object.assign(document.createElement('span'), { className: 'board-name', textContent: r.name });
+          const meta = Object.assign(document.createElement('span'), { className: 'board-meta', textContent: boardMeta(r) });
+          const who = document.createElement('span'); who.className = 'board-who'; who.append(name, meta);
+          const score = Object.assign(document.createElement('span'), { className: 'board-score', textContent: r.score10.toFixed(2) });
+          li.append(rank, avatarEl(r.avatar), who, score);
+          return li;
+        }));
+      } catch (err) {
+        console.warn('Leaderboard:', err);
+        status.textContent = 'Could not load the leaderboard. If this is the first time, the Firestore index may still need creating (see firebase/SETUP.md).';
+      }
+    };
+    drawTabs();
+    load();
+  }
+
+  function boardMeta(r) {
+    const parts = [`${r.rounds} round${r.rounds === 1 ? '' : 's'}`, r.difficulty];
+    if (r.timer > 0) parts.push(r.timer / 60 + ' min');
+    return parts.join(' · ');
+  }
+
+  function openBoardDialog() {
+    renderBoard($('board-content'), state.selection.mapId);
+    $('board-dialog').showModal();
+  }
+
+  /* ---------- 10. Boot ---------- */
   function wireEvents() {
     $('options-form').addEventListener('submit', (e) => { e.preventDefault(); startGame(); });
     $('guess-btn').addEventListener('click', () => submitGuess(false));
@@ -511,6 +725,9 @@
     $('next-btn').addEventListener('click', nextRound);
     $('again-btn').addEventListener('click', startGame);
     $('menu-btn').addEventListener('click', () => { showScreen('menu'); renderMenu(); });
+    $('player-btn').addEventListener('click', openProfileDialog);
+    $('board-btn').addEventListener('click', openBoardDialog);
+    $('board-close').addEventListener('click', () => $('board-dialog').close());
 
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Enter') return;
@@ -547,6 +764,8 @@
       return;
     }
     if (!currentEntry()) state.selection.mapId = state.index.maps[0].id;
+    $('board-btn').hidden = !Board.enabled;
+    renderPlayer();
     renderMenu();
   }
 

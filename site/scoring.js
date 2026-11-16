@@ -28,6 +28,57 @@
     return Math.round(scoring.maxPoints * Math.exp(-distanceM / scaleM));
   }
 
+  /** The distance scale for one spot: the map's scale, the global multiplier, and the spot's difficulty. */
+  function scaleFor(poolScaleM, loc, scoring) {
+    const byDifficulty = (scoring.difficultyScale && scoring.difficultyScale[loc.difficulty]) || 1;
+    return poolScaleM * scoring.scaleMultiplier * byDifficulty;
+  }
+
+  /**
+   * Time bonus for one round. remainingFraction is time left / time allowed (0..1),
+   * accuracy is the distance score / maxPoints (0..1). Returns 0 in untimed games.
+   * Uses the first tier (listed best to worst) whose threshold is met.
+   */
+  function timeBonusFor(remainingFraction, accuracy, timeBonus) {
+    if (!timeBonus || remainingFraction == null || !(accuracy > 0)) return 0;
+    const tier = timeBonus.tiers.find((t) => remainingFraction >= t.remaining);
+    if (!tier) return 0;
+    return Math.round(timeBonus.max * tier.share * Math.min(1, accuracy));
+  }
+
+  /** Most points one round can give in this game. */
+  function roundMax(scoring, timeBonus, timed) {
+    return scoring.maxPoints + (timed && timeBonus ? timeBonus.max : 0);
+  }
+
+  /** Total points as a score out of 10 (two decimals), so games of any length compare. */
+  function scoreOutOfTen(total, maxTotal) {
+    if (!(maxTotal > 0)) return 0;
+    return Math.round(Math.min(1, total / maxTotal) * 1000) / 100;
+  }
+
+  /** Local calendar date as "2026-11-10", from the device clock. */
+  function localDayKey(date) {
+    const d = date || new Date();
+    const p = (n) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+  }
+
+  /**
+   * Picks a line for a guess. fraction = score / max (null = no guess). Never repeats `last`.
+   * messages is window.GAME_MESSAGES; {distance} in a line is replaced by distanceText.
+   */
+  function pickMessage(fraction, messages, distanceText, last, rng) {
+    const random = rng || Math.random;
+    const lines = fraction == null
+      ? messages.noGuess
+      : (messages.bands.find((b) => fraction >= b.min) || messages.bands[messages.bands.length - 1]).lines;
+    let pool = lines.filter((l) => l !== last);
+    if (!pool.length) pool = lines;
+    const line = pool[Math.floor(random() * pool.length)];
+    return { raw: line, text: line.replace(/\{distance\}/g, distanceText || 'some distance') };
+  }
+
   /** "340 m", "3.4 km", "12 km" as {value, unit}. */
   function formatDistance(m) {
     if (m < 1000) return { value: String(Math.max(10, Math.round(m / 10) * 10)), unit: 'm' };
@@ -69,7 +120,7 @@
     return shuffle(eligible(pool, difficulty), rng).slice(0, n);
   }
 
-  const api = { haversineM, scoreFor, formatDistance, formatPoints, shuffle,
+  const api = { haversineM, scoreFor, scaleFor, timeBonusFor, roundMax, scoreOutOfTen, localDayKey, pickMessage, formatDistance, formatPoints, shuffle,
                 eligible, countsByDifficulty, pickLocations };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.GaliLib = api;

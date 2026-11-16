@@ -23,6 +23,11 @@
     <header class="brand">
       <h1 id="app-title" class="brand-title"></h1>
       <p id="app-tagline" class="brand-tagline"></p>
+      <!-- Shown only when the leaderboard is set up -->
+      <div id="player" class="player" hidden>
+        <span class="player-label">Playing as</span>
+        <button id="player-btn" class="player-btn" type="button" aria-label="Change name and avatar"></button>
+      </div>
     </header>
 
     <section class="menu-maps" aria-labelledby="maps-heading">
@@ -54,6 +59,7 @@
       </fieldset>
 
       <button id="start-btn" class="btn btn-primary" type="submit" disabled>Start game</button>
+      <button id="board-btn" class="btn btn-ghost" type="button" hidden>Leaderboard for this map</button>
     </form>
   </main>
 
@@ -88,8 +94,10 @@
       <p id="result-lead" class="result-lead"></p>
       <p class="result-distance"><span id="result-distance-value"></span><span id="result-distance-unit" class="result-unit"></span></p>
       <p id="result-sub" class="result-sub"></p>
+      <p id="result-message" class="result-message"></p>
       <div class="meter" aria-hidden="true"><div id="result-meter" class="meter-fill"></div></div>
       <p class="result-points"><span id="result-points"></span> <span class="result-points-of" id="result-points-of"></span></p>
+      <p id="result-bonus" class="result-bonus" hidden></p>
       <button id="next-btn" class="btn btn-primary" type="button"></button>
     </section>
   </main>
@@ -99,8 +107,10 @@
     <header class="final-head">
       <p id="final-map" class="final-map"></p>
       <p class="final-total"><span id="final-total"></span><span id="final-max" class="final-max"></span></p>
+      <p id="final-score10" class="final-score10"></p>
       <p id="final-best" class="final-best"></p>
     </header>
+    <section id="final-board" class="board" hidden></section>
     <ol id="final-rounds" class="final-rounds"></ol>
     <div class="final-actions">
       <button id="again-btn" class="btn btn-primary" type="button">Play again</button>
@@ -108,8 +118,33 @@
     </div>
   </main>
 
+  <!-- ================= DIALOGS (leaderboard setup only) ================= -->
+  <dialog id="profile-dialog" class="dialog" aria-labelledby="profile-title">
+    <h2 id="profile-title" class="dialog-title">Your player</h2>
+    <label class="dialog-field">
+      <span>Name</span>
+      <input id="profile-name" type="text" autocomplete="nickname" spellcheck="false">
+    </label>
+    <p class="dialog-field-label" id="avatar-label">Avatar</p>
+    <div id="profile-avatars" class="avatar-grid" role="radiogroup" aria-labelledby="avatar-label"></div>
+    <p id="profile-error" class="dialog-error" role="alert"></p>
+    <div class="dialog-actions">
+      <button id="profile-cancel" class="btn btn-ghost" type="button">Cancel</button>
+      <button id="profile-save" class="btn btn-primary" type="button">Save</button>
+    </div>
+  </dialog>
+
+  <dialog id="board-dialog" class="dialog dialog-wide" aria-label="Leaderboard">
+    <div id="board-content" class="board"></div>
+    <div class="dialog-actions">
+      <button id="board-close" class="btn btn-ghost" type="button">Close</button>
+    </div>
+  </dialog>
+
   <script src="config.js"></script>
+  <script src="messages.js"></script>
   <script src="scoring.js"></script>
+  <script src="leaderboard.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
