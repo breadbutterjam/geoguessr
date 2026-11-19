@@ -58,6 +58,16 @@ window.GAME_CONFIG = {
     ],
   },
 
+  /* ---- Coverage popup (the (i) next to a map in the menu) ----
+     A free OpenStreetMap base map. For the darker CARTO look, paste a free CARTO key
+     (https://www.carto.com/basemaps/apikey/) into cartoApiKey. */
+  coverageMap: {
+    cartoApiKey: '',
+    osmTiles: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+    cartoTiles: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+
   /* ---- Leaderboards (needs Firebase; see firebase/SETUP.md) ----
      While firebase.apiKey is empty the leaderboard stays off and the game works as before. */
   firebase: {

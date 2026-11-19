@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Rozha+One&display=swap">
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -134,6 +135,17 @@
     </div>
   </dialog>
 
+  <!-- Area covered by a map: opened by the (i) button in the map list -->
+  <dialog id="coverage-dialog" class="dialog dialog-wide" aria-labelledby="coverage-title">
+    <h2 id="coverage-title" class="dialog-title"></h2>
+    <p id="coverage-sub" class="coverage-sub"></p>
+    <div id="coverage-map" class="coverage-map" role="region" aria-label="Map of the area covered"></div>
+    <p id="coverage-note" class="coverage-note"></p>
+    <div class="dialog-actions">
+      <button id="coverage-close" class="btn btn-ghost" type="button">Close</button>
+    </div>
+  </dialog>
+
   <dialog id="board-dialog" class="dialog dialog-wide" aria-label="Leaderboard">
     <div id="board-content" class="board"></div>
     <div class="dialog-actions">
@@ -141,6 +153,7 @@
     </div>
   </dialog>
 
+  <script src="vendor/leaflet/leaflet.js"></script>
   <script src="config.js"></script>
   <script src="messages.js"></script>
   <script src="scoring.js"></script>

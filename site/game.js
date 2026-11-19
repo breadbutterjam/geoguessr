@@ -9,7 +9,7 @@
      6. Guessing and the timer
      7. Round result
      8. Final screen and personal bests
-     9. Player profile and leaderboard screens
+     9. Player profile and leaderboard screens (and the coverage popup)
     10. Boot
    ========================================================================== */
 (function () {
@@ -134,11 +134,15 @@
     const list = $('map-list');
     list.replaceChildren();
     for (const entry of state.index.maps) {
+      const selected = entry.id === state.selection.mapId;
+      const row = document.createElement('div');
+      row.className = 'map-row' + (selected ? ' is-selected' : '');
+
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'map-item' + (entry.id === state.selection.mapId ? ' is-selected' : '');
+      b.className = 'map-item';
       b.setAttribute('role', 'radio');
-      b.setAttribute('aria-checked', String(entry.id === state.selection.mapId));
+      b.setAttribute('aria-checked', String(selected));
       const name = document.createElement('span');
       name.className = 'map-item-name';
       name.textContent = entry.name;
@@ -147,7 +151,20 @@
       meta.textContent = entry.count.toLocaleString('en-IN') + ' spots';
       b.append(name, meta);
       b.addEventListener('click', () => { state.selection.mapId = entry.id; renderMenu(); });
-      list.appendChild(b);
+      row.appendChild(b);
+
+      // Only maps that have outline data get the (i) button
+      if (entry.outline) {
+        const info = document.createElement('button');
+        info.type = 'button';
+        info.className = 'map-info';
+        info.textContent = 'i';
+        info.setAttribute('aria-label', 'Show the area covered by ' + entry.name);
+        info.title = 'Show the area covered';
+        info.addEventListener('click', () => openCoverage(entry));
+        row.appendChild(info);
+      }
+      list.appendChild(row);
     }
   }
 
@@ -713,6 +730,69 @@
     $('board-dialog').showModal();
   }
 
+  /* ---------- 9b. Coverage popup (area a map covers) ---------- */
+  const coverage = { map: null, layers: [], outlines: {} };
+
+  function cssColour(name) {
+    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  }
+
+  function ensureCoverageMap() {
+    if (coverage.map) return;
+    const cm = CFG.coverageMap;
+    const map = L.map('coverage-map', { zoomControl: true, attributionControl: true });
+    const useCarto = Boolean(cm.cartoApiKey);
+    L.tileLayer(useCarto ? cm.cartoTiles + '?key=' + encodeURIComponent(cm.cartoApiKey) : cm.osmTiles, {
+      subdomains: 'abcd', maxZoom: 19, detectRetina: true, attribution: cm.attribution,
+    }).addTo(map);
+    // The fill sits in its own pane that is made see-through as a whole, so overlapping areas
+    // do not get darker where they meet. The outline is drawn above it at full strength.
+    map.createPane('coverageFill').style.zIndex = 410;
+    map.getPane('coverageFill').style.opacity = '0.4';
+    map.createPane('coverageLine').style.zIndex = 420;
+    coverage.map = map;
+  }
+
+  async function loadOutline(entry) {
+    if (coverage.outlines[entry.id]) return coverage.outlines[entry.id];
+    const url = CFG.poolsIndex.replace(/[^/]*$/, '') + entry.outline;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    coverage.outlines[entry.id] = await res.json();
+    return coverage.outlines[entry.id];
+  }
+
+  async function openCoverage(entry) {
+    const dialog = $('coverage-dialog');
+    $('coverage-title').textContent = entry.name;
+    $('coverage-sub').textContent = 'The shaded area is where this map’s spots can be.';
+    $('coverage-note').textContent = '';
+    dialog.showModal();
+    ensureCoverageMap();
+    const map = coverage.map;
+    map.invalidateSize();
+    for (const layer of coverage.layers) map.removeLayer(layer);
+    coverage.layers = [];
+    try {
+      const data = await loadOutline(entry);
+      const fill = L.geoJSON(data, { pane: 'coverageFill', interactive: false,
+        style: { stroke: false, fillColor: cssColour('--bougainvillea'), fillOpacity: 1 } }).addTo(map);
+      const line = L.geoJSON(data, { pane: 'coverageLine', interactive: false,
+        style: { color: cssColour('--lemon'), weight: 2, opacity: 1, fill: false } }).addTo(map);
+      coverage.layers = [fill, line];
+      map.fitBounds(fill.getBounds(), { padding: [20, 20] });
+      const info = data.map || {};
+      const bits = [];
+      if (info.km2) bits.push('About ' + info.km2.toLocaleString('en-IN') + ' km²');
+      bits.push(entry.count.toLocaleString('en-IN') + ' spots');
+      $('coverage-sub').textContent = bits.join(' · ') + '. The shaded area is where the spots can be.';
+      if (info.parts && info.parts.length > 1) $('coverage-note').textContent = 'Covers: ' + info.parts.join(', ');
+    } catch (err) {
+      console.warn('Coverage outline:', err);
+      $('coverage-note').textContent = 'Could not load the outline for this map.';
+    }
+  }
+
   /* ---------- 10. Boot ---------- */
   function wireEvents() {
     $('options-form').addEventListener('submit', (e) => { e.preventDefault(); startGame(); });
@@ -727,6 +807,7 @@
     $('menu-btn').addEventListener('click', () => { showScreen('menu'); renderMenu(); });
     $('player-btn').addEventListener('click', openProfileDialog);
     $('board-btn').addEventListener('click', openBoardDialog);
+    $('coverage-close').addEventListener('click', () => $('coverage-dialog').close());
     $('board-close').addEventListener('click', () => $('board-dialog').close());
 
     document.addEventListener('keydown', (e) => {

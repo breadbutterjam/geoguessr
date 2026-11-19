@@ -1,5 +1,5 @@
 {
- "generated_utc": "2026-11-09T14:04:36Z",
+ "generated_utc": "2026-11-19T07:59:43Z",
  "maps": [
   {
    "id": "mumbai",
@@ -17,7 +17,8 @@
     19.26948,
     72.98175
    ],
-   "score_scale_m": 4732
+   "score_scale_m": 4732,
+   "outline": "mumbai.outline.json"
   },
   {
    "id": "santacruz",
@@ -35,7 +36,8 @@
     19.09192,
     72.84754
    ],
-   "score_scale_m": 415
+   "score_scale_m": 415,
+   "outline": "santacruz.outline.json"
   },
   {
    "id": "juhu_andheri",
@@ -53,7 +55,8 @@
     19.11653,
     72.85535
    ],
-   "score_scale_m": 687
+   "score_scale_m": 687,
+   "outline": "juhu_andheri.outline.json"
   },
   {
    "id": "hwestward",
@@ -71,7 +74,8 @@
     19.09057,
     72.84322
    ],
-   "score_scale_m": 622
+   "score_scale_m": 622,
+   "outline": "hwestward.outline.json"
   },
   {
    "id": "my-map",
@@ -89,7 +93,8 @@
     19.10397,
     72.84692
    ],
-   "score_scale_m": 770
+   "score_scale_m": 770,
+   "outline": "my-map.outline.json"
   }
  ]
 }

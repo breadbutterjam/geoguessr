@@ -9,7 +9,8 @@ For each map in maps.json it:
   4. snaps each point to an official outdoor Street View panorama via the metadata endpoint,
   5. filters (minimum capture year, inside boundary, no duplicates, minimum spacing),
   6. tags each location easy / medium / hard from its road type,
-  7. writes site/pools/<map id>.json plus site/pools/index.json, ready for the game page.
+  7. writes site/pools/<map id>.json plus site/pools/index.json, ready for the game page,
+  8. writes site/pools/<map id>.outline.json: the covered area, shown by the (i) button in the menu.
 
 Usage (run from the folder containing maps.json):
     python generate_pool.py --list
@@ -19,6 +20,7 @@ Usage (run from the folder containing maps.json):
     python generate_pool.py --map mumbai
     python generate_pool.py --all
     python generate_pool.py --rebuild-index                     # refresh the game's map list
+    python generate_pool.py --outlines --all                    # (re)write coverage outlines only, no Street View calls
 
 Needs:  pip install requests   and   GOOGLE_MAPS_API_KEY set (only for generation).
 """
@@ -395,6 +397,100 @@ def difficulty_for(highway, mapping):
     return mapping.get(highway, "medium")
 
 
+# ---------------------------------------------------------------- coverage outline
+
+OUTLINE_TOLERANCE_DEG = 0.0003   # about 30 m: plenty for a map you look at in a popup
+OUTLINE_MIN_PART_KM2 = 0.02      # tiny islands and slivers are left out of the drawing
+
+
+def simplify_ring(ring, tol):
+    """Douglas-Peucker on a closed ring of (lng, lat); keeps the first/last point."""
+    pts = ring[:-1] if ring[0] == ring[-1] else list(ring)
+    if len(pts) <= 4:
+        return pts + [pts[0]]
+
+    def dist(p, a, b):
+        dx, dy = b[0] - a[0], b[1] - a[1]
+        if dx == 0 and dy == 0:
+            return math.hypot(p[0] - a[0], p[1] - a[1])
+        t = max(0, min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / (dx * dx + dy * dy)))
+        return math.hypot(p[0] - (a[0] + t * dx), p[1] - (a[1] + t * dy))
+
+    def dp(points):
+        keep = [False] * len(points)
+        keep[0] = keep[-1] = True
+        stack = [(0, len(points) - 1)]
+        while stack:
+            lo, hi = stack.pop()
+            far, idx = 0.0, None
+            for i in range(lo + 1, hi):
+                d = dist(points[i], points[lo], points[hi])
+                if d > far:
+                    far, idx = d, i
+            if idx is not None and far > tol:
+                keep[idx] = True
+                stack += [(lo, idx), (idx, hi)]
+        return [p for p, k in zip(points, keep) if k]
+
+    # split at the farthest point from the start so a closed ring simplifies sensibly
+    far = max(range(len(pts)), key=lambda i: math.hypot(pts[i][0] - pts[0][0], pts[i][1] - pts[0][1]))
+    a = dp(pts[:far + 1])
+    b = dp(pts[far:] + [pts[0]])
+    out = a[:-1] + b
+    return out if len(out) >= 4 else pts + [pts[0]]
+
+
+def outline_polygons(polygons):
+    """Simplified GeoJSON polygon coordinates for a list of [outer, holes...] polygons."""
+    out = []
+    for poly in polygons:
+        if Boundary([poly], "").area_km2() < OUTLINE_MIN_PART_KM2:
+            continue
+        rings = []
+        for i, ring in enumerate(poly):
+            simple = simplify_ring([tuple(p) for p in ring], OUTLINE_TOLERANCE_DEG)
+            if len(simple) >= 4 and (i == 0 or Boundary([[simple]], "").area_km2() > 0):
+                rings.append([[round(x, 5), round(y, 5)] for x, y in simple])
+        if rings:
+            out.append(rings)
+    return out
+
+
+def write_outline(m, boundary):
+    """Saves the area the map covers as site/pools/<id>.outline.json (for the game's (i) button).
+
+    Custom maps made in the Area Viewer keep each area as its own named part; every other map
+    is one part named after the map."""
+    parts = []   # (name, polygons)
+    src = m.get("boundary", {}).get("geojson")
+    if src and os.path.exists(src):
+        with open(src, encoding="utf-8") as f:
+            data = json.load(f)
+        for feat in data.get("features", []):
+            name = (feat.get("properties") or {}).get("name")
+            polys = geojson_to_polygons(feat.get("geometry") or {})
+            if name and polys:
+                parts.append((name, polys))
+    if not parts:
+        parts = [(m["name"], boundary.polygons)]
+
+    features = []
+    for name, polys in parts:
+        coords = outline_polygons(polys)
+        if coords:
+            features.append({"type": "Feature", "properties": {"name": name},
+                             "geometry": {"type": "MultiPolygon", "coordinates": coords}})
+    info = {"name": m["name"], "parts": [f["properties"]["name"] for f in features]}
+    if len(features) == 1:   # one shape: the area is meaningful (overlapping parts would be double-counted)
+        info["km2"] = round(boundary.area_km2(), 1)
+    os.makedirs(POOL_DIR, exist_ok=True)
+    path = os.path.join(POOL_DIR, f"{m['id']}.outline.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"type": "FeatureCollection", "map": info, "features": features},
+                  f, separators=(",", ":"))
+    print(f"  Outline: {path} ({os.path.getsize(path) / 1024:.1f} KB, {len(features)} part(s))")
+
+
 # ---------------------------------------------------------------- generation
 
 def generate(m, key, args):
@@ -402,6 +498,7 @@ def generate(m, key, args):
     print(f"\n=== {m['name']} ({m['id']}) ===")
     boundary = resolve_boundary(m, args.refresh)
     print(f"  Boundary: {boundary.source}")
+    write_outline(m, boundary)
     roads = load_roads(m, boundary, args.refresh)
     sampler = RoadSampler(roads)
     if not sampler.ways:
@@ -500,7 +597,7 @@ def write_index(maps):
     names = {m["id"]: m["name"] for m in maps}   # a name changed in maps.json / a custom file wins
     entries = []
     for fn in sorted(os.listdir(POOL_DIR)):
-        if not fn.endswith(".json") or fn == "index.json":
+        if not fn.endswith(".json") or fn == "index.json" or fn.endswith(".outline.json"):
             continue
         try:
             with open(os.path.join(POOL_DIR, fn), encoding="utf-8") as f:
@@ -508,7 +605,10 @@ def write_index(maps):
             counts = Counter(loc["difficulty"] for loc in d["locations"])
             entries.append({"id": d["id"], "name": names.get(d["id"], d["name"]), "file": fn,
                             "count": len(d["locations"]), "counts": dict(counts),
-                            "bbox": d.get("bbox"), "score_scale_m": d.get("score_scale_m")})
+                            "bbox": d.get("bbox"), "score_scale_m": d.get("score_scale_m"),
+                            "outline": (f"{d['id']}.outline.json"
+                                        if os.path.exists(os.path.join(POOL_DIR, f"{d['id']}.outline.json"))
+                                        else None)})
         except (ValueError, KeyError) as exc:
             print(f"Skipping {fn}: not a valid pool file ({exc})")
     entries.sort(key=lambda e: (order.get(e["id"], 999), e["name"].lower()))
@@ -538,6 +638,8 @@ def main():
     ap.add_argument("--rebuild-index", action="store_true",
                     help="rebuild site/pools/index.json from the pool files and exit")
     ap.add_argument("--check-boundaries", action="store_true", help="resolve boundaries only")
+    ap.add_argument("--outlines", action="store_true",
+                    help="write the coverage outlines for the chosen maps (no Street View calls) and exit")
     ap.add_argument("--target", type=int, help="override target pool size")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--workers", type=int, default=8)
@@ -571,6 +673,20 @@ def main():
 
     if args.check_boundaries:
         check_boundaries(selected, args.refresh)
+        return
+
+    if args.outlines:
+        failed = []
+        for m in selected:
+            print(f"\n=== {m['name']} ({m['id']}) ===")
+            try:
+                write_outline(m, resolve_boundary(m, args.refresh))
+            except SystemExit as err:   # one map with no usable boundary must not stop the rest
+                print(f"  Skipped: {err}")
+                failed.append(m["id"])
+        write_index(maps)
+        if failed:
+            print(f"\nNo outline for: {', '.join(failed)}. Fix their boundary in maps.json and run again.")
         return
 
     key = os.environ.get("GOOGLE_MAPS_API_KEY")
