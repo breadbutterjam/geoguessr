@@ -38,7 +38,7 @@ window.GAME_CONFIG = {
 
     /* Bump this when you change how scoring works. It is saved with every record, and
        leaderboards and local bests only compare records with the same number. */
-    version: 2,
+    version: 3,
   },
 
   /* ---- Time bonus ----
@@ -71,10 +71,10 @@ window.GAME_CONFIG = {
   /* ---- Leaderboards (needs Firebase; see firebase/SETUP.md) ----
      While firebase.apiKey is empty the leaderboard stays off and the game works as before. */
   firebase: {
-    apiKey: '',
-    authDomain: '',
-    projectId: '',
-    appId: '',
+    apiKey: 'AIzaSyAIvrxVkOQgBsoLRtEYARGDVY_pxvPVX1Q',
+    authDomain: 'galiguessr.firebaseapp.com',
+    projectId: 'galiguessr',
+    appId: '1:1001915612743:web:c3b761553a04899cc87b62',
   },
   leaderboard: {
     topN: 10,                          // rows shown per board
@@ -85,13 +85,14 @@ window.GAME_CONFIG = {
   /* Player avatars. "emoji" is the fallback; put your own images in site/avatars/ and set
      "src" (e.g. 'avatars/fox.png') to use them. "id" is what gets saved: keep ids stable. */
   avatars: [
-    { id: 'fox',      label: 'Fox',      emoji: '🦊', src: null },
-    { id: 'tiger',    label: 'Tiger',    emoji: '🐯', src: null },
-    { id: 'elephant', label: 'Elephant', emoji: '🐘', src: null },
-    { id: 'monkey',   label: 'Monkey',   emoji: '🐵', src: null },
-    { id: 'owl',      label: 'Owl',      emoji: '🦉', src: null },
+    { id: 'elephant', label: 'Elephant', emoji: '🐘', src: 'avatars/elephant.png' },
+    { id: 'ant', label: 'Ant', emoji: '🐜', src: 'avatars/ant.png' },
+    { id: 'giraffe', label: 'Giraffe', emoji: '🦒', src: 'avatars/giraffe.png' },
+    { id: 'hippo',   label: 'Hippo',   emoji: '🦛', src: 'avatars/hippo.png' },
+    { id: 'panda',    label: 'Panda',    emoji: '🐼', src: 'avatars/panda.png' },
+    { id: 'penguin',      label: 'Penguin',      emoji: '🐧', src: 'avatars/penguin.png' },
+    
     { id: 'bear',     label: 'Bear',     emoji: '🐻', src: null },
-    { id: 'panda',    label: 'Panda',    emoji: '🐼', src: null },
     { id: 'frog',     label: 'Frog',     emoji: '🐸', src: null },
     { id: 'cat',      label: 'Cat',      emoji: '🐱', src: null },
     { id: 'dog',      label: 'Dog',      emoji: '🐶', src: null },

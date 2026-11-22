@@ -24,17 +24,18 @@
     <header class="brand">
       <h1 id="app-title" class="brand-title"></h1>
       <p id="app-tagline" class="brand-tagline"></p>
-      <!-- Shown only when the leaderboard is set up -->
-      <div id="player" class="player" hidden>
-        <span class="player-label">Playing as</span>
-        <button id="player-btn" class="player-btn" type="button" aria-label="Change name and avatar"></button>
-      </div>
     </header>
 
     <section class="menu-maps" aria-labelledby="maps-heading">
       <h2 id="maps-heading" class="menu-heading">Choose a map</h2>
       <div id="map-list" class="map-list" role="radiogroup" aria-labelledby="maps-heading"></div>
     </section>
+
+    <div class="menu-side">
+    <!-- Top right: who is playing. Shown only when the leaderboard is set up. -->
+    <div id="player" class="player" hidden>
+      <button id="player-btn" class="player-btn" type="button" aria-haspopup="dialog" aria-label="Player and privacy"></button>
+    </div>
 
     <form id="options-form" class="menu-options" autocomplete="off">
       <fieldset class="field">
@@ -62,6 +63,7 @@
       <button id="start-btn" class="btn btn-primary" type="submit" disabled>Start game</button>
       <button id="board-btn" class="btn btn-ghost" type="button" hidden>Leaderboard for this map</button>
     </form>
+    </div>
   </main>
 
   <!-- ================= GAME ================= -->
@@ -111,6 +113,10 @@
       <p id="final-score10" class="final-score10"></p>
       <p id="final-best" class="final-best"></p>
     </header>
+    <p id="final-hint" class="final-hint" hidden>
+      <button id="final-hint-btn" class="link-btn" type="button">Sign in with Google</button> to keep your scores across devices.
+      <button id="final-hint-x" class="link-btn" type="button" aria-label="Dismiss">Not now</button>
+    </p>
     <section id="final-board" class="board" hidden></section>
     <ol id="final-rounds" class="final-rounds"></ol>
     <div class="final-actions">
@@ -121,16 +127,28 @@
 
   <!-- ================= DIALOGS (leaderboard setup only) ================= -->
   <dialog id="profile-dialog" class="dialog" aria-labelledby="profile-title">
-    <h2 id="profile-title" class="dialog-title">Your player</h2>
+    <h2 id="profile-title" class="dialog-title">Player and privacy</h2>
     <label class="dialog-field">
       <span>Name</span>
       <input id="profile-name" type="text" autocomplete="nickname" spellcheck="false">
     </label>
     <p class="dialog-field-label" id="avatar-label">Avatar</p>
     <div id="profile-avatars" class="avatar-grid" role="radiogroup" aria-labelledby="avatar-label"></div>
+    <details id="account-details" class="dialog-more">
+      <summary>Account and privacy</summary>
+      <p id="account-status" class="dialog-note"></p>
+      <button id="account-signin" class="btn btn-ghost btn-small" type="button" hidden>Sign in with Google</button>
+      <button id="account-signout" class="btn btn-ghost btn-small" type="button" hidden>Sign out</button>
+      <label class="dialog-check">
+        <input id="privacy-show" type="checkbox" checked>
+        <span>Show me on the leaderboards</span>
+      </label>
+      <p class="dialog-note">Turn this off to remove your entries from the boards and stop posting new scores.</p>
+      <p id="account-msg" class="dialog-note" role="status"></p>
+    </details>
     <p id="profile-error" class="dialog-error" role="alert"></p>
     <div class="dialog-actions">
-      <button id="profile-cancel" class="btn btn-ghost" type="button">Cancel</button>
+      <button id="profile-cancel" class="btn btn-ghost" type="button">Close</button>
       <button id="profile-save" class="btn btn-primary" type="button">Save</button>
     </div>
   </dialog>

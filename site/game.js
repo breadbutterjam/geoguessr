@@ -603,7 +603,15 @@
     if (Board.enabled) {
       boardBox.replaceChildren(Object.assign(document.createElement('p'), { className: 'board-status', textContent: 'Saving your score…' }));
       Board.submit(record)
-        .then(() => renderBoard(boardBox, s.mapId))
+        .then((res) => {
+          renderBoard(boardBox, s.mapId);
+          if (res.optedOut) {
+            boardBox.appendChild(Object.assign(document.createElement('p'), {
+              className: 'board-status',
+              textContent: 'You are off the leaderboards, so this score was not posted. You can change that under Player and privacy.',
+            }));
+          }
+        })
         .catch((err) => {
           console.warn('Leaderboard:', err);
           boardBox.replaceChildren(Object.assign(document.createElement('p'), {
@@ -611,6 +619,10 @@
           }));
         });
     }
+    // A quiet one-line nudge for guests, until they dismiss it
+    let dismissed = false;
+    try { dismissed = localStorage.getItem('gali.hintDismissed') === '1'; } catch (e) { /* ignore */ }
+    $('final-hint').hidden = !(Board.enabled && Board.accountMode() === 'guest' && !dismissed);
     $('again-btn').focus();
   }
 
@@ -634,24 +646,29 @@
     return wrap;
   }
 
-  /** "Playing as [avatar] Name" on the menu, with a button to change it. */
+  /** The small player chip, top right of the menu: avatar always; name and "(guest)" on wide screens. */
   function renderPlayer() {
     const box = $('player');
     box.hidden = !Board.enabled;
     if (!Board.enabled) return;
     const p = Board.getProfile();
+    const guest = Board.accountMode() === 'guest';
     const btn = $('player-btn');
-    btn.replaceChildren(avatarEl(p.avatar), Object.assign(document.createElement('span'), { textContent: p.name }),
-      Object.assign(document.createElement('span'), { className: 'player-change', textContent: 'Change' }));
+    const bits = [avatarEl(p.avatar), Object.assign(document.createElement('span'), { className: 'player-name', textContent: p.name })];
+    if (guest) bits.push(Object.assign(document.createElement('span'), { className: 'player-tag', textContent: '(guest)' }));
+    btn.replaceChildren(...bits);
+    btn.setAttribute('aria-label', `Player and privacy: ${p.name}${guest ? ' (guest)' : ''}`);
   }
 
-  function openProfileDialog() {
+  function openProfileDialog(openAccount) {
     const dialog = $('profile-dialog');
     const p = Board.getProfile();
     const input = $('profile-name');
     input.value = p.name;
     input.maxLength = CFG.leaderboard.nameMaxLength;
     $('profile-error').textContent = '';
+    $('account-msg').textContent = '';
+    $('account-details').open = Boolean(openAccount);
     let chosen = p.avatar;
     const grid = $('profile-avatars');
     const paint = () => {
@@ -665,6 +682,59 @@
       }));
     };
     paint();
+
+    // ---- Account and privacy ----
+    const msg = (text) => { $('account-msg').textContent = text || ''; };
+    const refreshAccount = async () => {
+      const google = Board.accountMode() === 'google';
+      $('account-status').textContent = google
+        ? 'Signed in with Google. Your scores follow you across devices.'
+        : 'Playing as a guest. Sign in with Google to keep your scores across devices.';
+      $('account-signin').hidden = google;
+      $('account-signout').hidden = !google;
+      const show = $('privacy-show');
+      try { show.checked = !(await Board.getOptedOut()); show.disabled = false; }
+      catch (err) { show.disabled = true; msg('The leaderboard is not reachable right now.'); }
+    };
+    refreshAccount();
+
+    $('account-signin').onclick = async () => {
+      const button = $('account-signin');
+      const wasSaved = Board.getProfile().name;
+      button.disabled = true; msg('Opening Google…');
+      const res = await Board.signInWithGoogle();
+      button.disabled = false;
+      if (!res.ok) { msg(res.error); return; }
+      if (input.value === wasSaved) input.value = res.profile.name;   // pick up the prefilled first name
+      chosen = res.profile.avatar; paint();
+      msg('Signed in.');
+      renderPlayer(); refreshAccount();
+    };
+    $('account-signout').onclick = async () => {
+      msg('Signing out…');
+      try {
+        await Board.signOutUser();
+        const fresh = Board.getProfile();
+        input.value = fresh.name; chosen = fresh.avatar; paint();
+        msg('Signed out. You are playing as a guest.');
+        renderPlayer(); refreshAccount();
+      } catch (err) { console.warn(err); msg('Could not sign out. Please try again.'); }
+    };
+    $('privacy-show').onchange = async (event) => {
+      const show = event.target;
+      const wantOff = !show.checked;
+      if (wantOff && !window.confirm('Remove your entries from every leaderboard and stop posting new scores?')) { show.checked = true; return; }
+      show.disabled = true;
+      try {
+        await Board.setOptedOut(wantOff);
+        msg(wantOff ? 'You are off the leaderboards. Your entries have been removed.' : 'Your scores will be posted again from your next game.');
+      } catch (err) {
+        console.warn(err); show.checked = !wantOff;
+        msg('Could not change that right now. Please try again.');
+      }
+      show.disabled = false;
+    };
+
     $('profile-save').onclick = () => {
       const res = Board.saveProfile(input.value, chosen);
       if (!res.ok) { $('profile-error').textContent = res.error; return; }
@@ -673,7 +743,7 @@
     };
     $('profile-cancel').onclick = () => dialog.close();
     dialog.showModal();
-    input.select();
+    if (!openAccount) input.select();
   }
 
   /** Fills `root` with the Today / All time boards for one map. */
@@ -805,7 +875,12 @@
     $('next-btn').addEventListener('click', nextRound);
     $('again-btn').addEventListener('click', startGame);
     $('menu-btn').addEventListener('click', () => { showScreen('menu'); renderMenu(); });
-    $('player-btn').addEventListener('click', openProfileDialog);
+    $('player-btn').addEventListener('click', () => openProfileDialog(false));
+    $('final-hint-btn').addEventListener('click', () => openProfileDialog(true));
+    $('final-hint-x').addEventListener('click', () => {
+      try { localStorage.setItem('gali.hintDismissed', '1'); } catch (e) { /* ignore */ }
+      $('final-hint').hidden = true;
+    });
     $('board-btn').addEventListener('click', openBoardDialog);
     $('coverage-close').addEventListener('click', () => $('coverage-dialog').close());
     $('board-close').addEventListener('click', () => $('board-dialog').close());
@@ -846,6 +921,8 @@
     }
     if (!currentEntry()) state.selection.mapId = state.index.maps[0].id;
     $('board-btn').hidden = !Board.enabled;
+    Board.onChange(renderPlayer);
+    Board.init();
     renderPlayer();
     renderMenu();
   }
